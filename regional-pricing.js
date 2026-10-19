@@ -12,7 +12,7 @@
     root.classList.remove('region-allowed');
     const gate = document.getElementById('regionGate');
     gate.replaceChildren();
-    const heading = document.createElement('h1'); heading.textContent = title;
+    const heading = document.createElement('p'); heading.className = 'region-gate-title'; heading.textContent = title;
     const text = document.createElement('p'); text.textContent = message;
     gate.append(heading, text);
     if (retry) { const button = document.createElement('button'); button.textContent = 'Try again'; button.onclick = () => location.reload(); gate.append(button); }
@@ -35,6 +35,7 @@
       if (restricted.has(geo.country_code)) { showGate('Service unavailable in your region', 'MERI SUKHNA is for families living outside India, Pakistan and Bangladesh.'); return; }
       const currency = String(geo.currency || '').toUpperCase();
       if (!/^[A-Z]{3}$/.test(currency) || ['INR', 'PKR', 'BDT'].includes(currency)) throw new Error('Unsupported currency');
+      root.classList.add('region-allowed');
       // Country access can be verified independently of currency-service availability.
       let rate = 1, rateDate = '';
       try {
