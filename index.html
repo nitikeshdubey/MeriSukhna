@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10231f">
+  <meta name="description" content="MERI SUKHNA helps you complete your Sukhna in Punjab when you cannot be there yourself. Akhand Paath Sahib, Sukhmani Sahib Paath, Rumala Sahib, Deg, Ardaas, Langar and more.">
+  <meta property="og:title" content="MERI SUKHNA | Complete Your Sukhna">
+  <meta property="og:description" content="Punjab nahi aa sakde? MERI SUKHNA can help you complete your Sukhna at the Gurdwara Sahib.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nitikeshdubey.github.io/MeriSukhna/">
+  <title>MERI SUKHNA | Complete Your Sukhna</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #10231f;
+      --green-2: #18342e;
+      --cream: #f8f5ed;
+      --cream-2: #eee9dc;
+      --gold: #c69a55;
+      --gold-light: #e1c38f;
+      --text: #17211e;
+      --muted: #66736d;
+      --white: #ffffff;
+      --line: rgba(16,35,31,.11);
+      --shadow: 0 24px 70px rgba(16,35,31,.10);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    img { display: block; max-width: 100%; }
+    section { scroll-margin-top: 92px; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 22px;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 1.02;
+      letter-spacing: -.055em;
+      font-weight: 800;
+      max-width: 780px;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1.08;
+      letter-spacing: -.04em;
+      font-weight: 800;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .section-head { max-width: 700px; margin-bottom: 48px; }
+    .section-head p { color: var(--muted); margin-bottom: 0; font-size: 1rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 23px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: .94rem;
+      font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--gold); color: var(--green); box-shadow: 0 12px 30px rgba(198,154,85,.22); }
+    .btn-primary:hover { box-shadow: 0 16px 38px rgba(198,154,85,.3); }
+    .btn-dark { background: var(--green); color: var(--white); }
+    .btn-light { background: transparent; color: var(--green); border-color: rgba(16,35,31,.18); }
+    .btn-light:hover { background: rgba(255,255,255,.55); }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease;
+    }
+    header.scrolled {
+      background: rgba(248,245,237,.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 30px rgba(16,35,31,.07);
+    }
+
+    .nav {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .logo {
+      display: inline-flex;
+      flex-direction: column;
+      line-height: 1;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .logo small {
+      margin-top: 6px;
+      font-size: .54rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      color: var(--muted);
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      font-size: .88rem;
+      font-weight: 600;
+      color: rgba(23,33,30,.84);
+      transition: color .2s ease;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 76px;
+      left: 20px;
+      right: 20px;
+      padding: 14px;
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+    .mobile-menu.open { display: grid; }
+    .mobile-menu a { padding: 13px 12px; font-weight: 600; border-radius: 12px; }
+    .mobile-menu a:hover { background: var(--cream); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 830px;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at 83% 25%, rgba(198,154,85,.16), transparent 28%),
+        radial-gradient(circle at 10% 80%, rgba(24,52,46,.08), transparent 27%),
+        var(--cream);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -150px;
+      bottom: -220px;
+      width: 540px;
+      height: 540px;
+      border: 1px solid rgba(198,154,85,.22);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 60px rgba(198,154,85,.035),
+        0 0 0 120px rgba(198,154,85,.025);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 70px;
+      padding-top: 104px;
+      padding-bottom: 80px;
+    }
+
+    .hero-copy p {
+      max-width: 670px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    .hero-note { display: flex; align-items: center; gap: 9px; font-size: .78rem; color: var(--muted); font-weight: 600; }
+    .hero-note span { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+
+    .hero-visual {
+      position: relative;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-card {
+      position: relative;
+      width: min(480px, 100%);
+      min-height: 530px;
+      border-radius: 32px;
+      overflow: hidden;
+      background: var(--green);
+      box-shadow: 0 30px 80px rgba(16,35,31,.22);
+      transform: rotate(1.3deg);
+    }
+    .visual-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16,35,31,0) 38%, rgba(16,35,31,.78) 100%);
+      z-index: 1;
+    }
+    .visual-card img { width: 100%; height: 100%; object-fit: cover; min-height: 530px; }
+    .visual-caption {
+      position: absolute;
+      z-index: 2;
+      left: 28px;
+      right: 28px;
+      bottom: 27px;
+      color: #fff;
+    }
+    .visual-caption span { color: var(--gold-light); font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
+    .visual-caption strong { display: block; margin-top: 4px; font-size: 1.35rem; }
+
+    .floating-tag {
+      position: absolute;
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 17px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 16px;
+      box-shadow: 0 18px 45px rgba(16,35,31,.15);
+      font-size: .76rem;
+      font-weight: 700;
+    }
+    .floating-tag.top { top: 54px; left: -12px; }
+    .floating-tag.bottom { right: -12px; bottom: 54px; }
+    .tag-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); }
+
+    /* TRUST */
+    .trust-wrap { margin-top: -1px; position: relative; z-index: 3; }
+    .trust-box {
+      background: var(--green);
+      color: #fff;
+      border-radius: 26px;
+      padding: 34px 42px;
+      display: grid;
+      grid-template-columns: 1.2fr 2fr 1fr;
+      align-items: center;
+      gap: 30px;
+      box-shadow: 0 22px 55px rgba(16,35,31,.17);
+    }
+    .trust-number { font-size: clamp(3.2rem, 6vw, 5rem); line-height: .95; font-weight: 800; letter-spacing: -.05em; color: var(--gold-light); }
+    .trust-label { font-size: .95rem; font-weight: 700; margin-top: 8px; }
+    .trust-copy { color: rgba(255,255,255,.7); font-size: .93rem; }
+    .trust-mini { display: flex; justify-content: flex-end; text-align: right; font-size: .8rem; color: rgba(255,255,255,.66); }
+
+    /* INTRO */
+    .intro { padding: 120px 0 80px; }
+    .intro-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 70px; align-items: start; }
+    .intro-copy p { color: var(--muted); font-size: 1rem; max-width: 610px; }
+    .intro-points { display: grid; gap: 13px; margin-top: 24px; }
+    .intro-point { display: flex; gap: 12px; align-items: flex-start; font-size: .92rem; font-weight: 600; }
+    .check {
+      width: 25px; height: 25px; flex: 0 0 25px;
+      display: grid; place-items: center;
+      background: rgba(198,154,85,.13); color: var(--gold); border-radius: 50%; font-size: .8rem; font-weight: 800;
+    }
+    .intro-card {
+      padding: 44px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+    .intro-card .quote-mark { color: var(--gold); font-size: 3.5rem; line-height: .7; font-weight: 800; }
+    .intro-card blockquote { margin: 20px 0 22px; font-size: 1.7rem; line-height: 1.35; font-weight: 700; letter-spacing: -.02em; }
+    .intro-card p { color: var(--muted); margin: 0; font-size: .9rem; }
+
+    /* HOW */
+    .how { padding: 80px 0 110px; }
+    .step-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .step-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      min-height: 245px;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .step-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(16,35,31,.08); }
+    .step-num { font-size: .76rem; font-weight: 800; color: var(--gold); letter-spacing: .12em; margin-bottom: 44px; }
+    .step-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+
+    /* WHAT WE OFFER */
+    .offers { padding: 110px 0; background: var(--cream-2); }
+    .offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .offer-card { background: rgba(255,255,255,.78); border: 1px solid rgba(16,35,31,.1); padding: 28px; border-radius: 22px; min-height: 250px; }
+    .offer-card.wide { grid-column: span 2; }
+    .offer-icon { width: 46px; height: 46px; border-radius: 14px; background: var(--green); color: var(--gold-light); display: grid; place-items: center; font-weight: 800; font-size: .9rem; margin-bottom: 22px; }
+    .offer-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+
+    /* GURDWARA MARQUEE */
+    .gurdwaras { padding: 110px 0 120px; background: var(--white); overflow: hidden; }
+    .marquee-shell { position: relative; margin-left: calc((100vw - min(var(--max), calc(100vw - 40px))) / -2); margin-right: calc((100vw - min(var(--max), calc(100vw - 40px))) / -2); }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 18px;
+      animation: scroll 55s linear infinite;
+      padding: 6px 0;
+    }
+    .marquee-shell:hover .marquee-track { animation-play-state: paused; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .g-card {
+      width: 265px;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      flex: 0 0 265px;
+    }
+    .g-card img { width: 100%; height: 200px; object-fit: cover; }
+    .g-info { padding: 17px 18px 20px; }
+    .g-name { font-weight: 700; font-size: .96rem; line-height: 1.35; margin-bottom: 3px; }
+    .g-place { font-size: .78rem; color: var(--muted); }
+    .gurdwara-note { margin-top: 32px; color: var(--muted); font-size: .86rem; }
+    .gurdwara-note strong { color: var(--text); }
+
+    /* PACKAGES */
+    .packages { padding: 120px 0; background: var(--cream); }
+    .package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+    .package-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+      min-height: 585px;
+    }
+    .package-card.featured {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+      transform: translateY(-12px);
+      box-shadow: 0 24px 60px rgba(16,35,31,.20);
+    }
+    .package-card.premium { border: 2px solid var(--gold); }
+    .package-badge {
+      position: absolute;
+      top: 19px;
+      right: 20px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(198,154,85,.14);
+      color: var(--gold);
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+    }
+    .featured .package-badge { background: rgba(225,195,143,.14); color: var(--gold-light); }
+    .package-name { font-size: .78rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; color: var(--gold); }
+    .featured .package-name { color: var(--gold-light); }
+    .package-title { font-size: 1.55rem; margin: 13px 0 8px; letter-spacing: -.03em; }
+    .package-desc { min-height: 49px; margin-bottom: 22px; color: var(--muted); font-size: .84rem; }
+    .featured .package-desc { color: rgba(255,255,255,.68); }
+    .feature-list { display: grid; gap: 10px; margin-bottom: 26px; }
+    .feature { display: flex; gap: 9px; align-items: flex-start; font-size: .82rem; }
+    .feature::before { content: '✓'; color: var(--gold); font-weight: 800; }
+    .featured .feature::before { color: var(--gold-light); }
+    .package-price { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--line); }
+    .featured .package-price { border-top-color: rgba(255,255,255,.12); }
+    .price { font-size: 1.9rem; font-weight: 800; letter-spacing: -.04em; }
+    .price-note { font-size: .73rem; color: var(--muted); margin-top: 3px; }
+    .featured .price-note { color: rgba(255,255,255,.56); }
+    .package-card .btn { width: 100%; margin-top: 17px; }
+
+    .pricing-note {
+      margin-top: 25px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(198,154,85,.08);
+      border: 1px solid rgba(198,154,85,.18);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    .pricing-note strong { color: var(--text); }
+
+    /* WHY */
+    .why { padding: 110px 0; background: var(--cream-2); }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .why-card { padding: 25px; border-radius: 20px; background: rgba(255,255,255,.72); border: 1px solid var(--line); }
+    .why-card span { display: inline-grid; width: 34px; height: 34px; place-items: center; border-radius: 10px; background: var(--green); color: var(--gold-light); font-size: .76rem; font-weight: 800; margin-bottom: 35px; }
+    .why-card p { color: var(--muted); margin: 0; font-size: .84rem; }
+
+    /* FAMILY */
+    .family { padding: 110px 0; background: var(--white); }
+    .family-box { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; }
+    .family-copy p { color: var(--muted); max-width: 590px; }
+    .family-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .chip { padding: 11px 15px; border-radius: 999px; background: var(--cream); border: 1px solid var(--line); font-size: .8rem; font-weight: 600; }
+    .family-side { padding: 34px; border-radius: 24px; background: var(--green); color: #fff; box-shadow: var(--shadow); }
+    .family-side p { color: rgba(255,255,255,.68); font-size: .86rem; }
+    .family-side strong { display: block; font-size: 1.25rem; line-height: 1.35; margin-bottom: 15px; }
+
+    /* TRANSPARENCY */
+    .truth { padding: 110px 0; background: var(--green); color: #fff; }
+    .truth-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; align-items: start; }
+    .truth h2 { color: #fff; }
+    .truth-copy p { color: rgba(255,255,255,.7); margin-bottom: 17px; }
+    .truth-callout { margin-top: 30px; display: inline-flex; padding: 11px 15px; border: 1px solid rgba(225,195,143,.25); border-radius: 999px; color: var(--gold-light); font-size: .78rem; font-weight: 700; }
+
+    /* GLOBAL */
+    .global { padding: 100px 0 110px; background: var(--cream); }
+    .global-box { background: var(--white); border: 1px solid var(--line); border-radius: 26px; padding: 44px; }
+    .location-grid { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 28px; }
+    .location { padding: 10px 14px; border-radius: 999px; background: var(--cream); border: 1px solid var(--line); font-size: .82rem; font-weight: 600; }
+    .global-note { margin: 22px 0 0; color: var(--muted); font-size: .85rem; }
+
+    /* FAQ */
+    .faq { padding: 110px 0 120px; background: var(--white); }
+    .faq-list { max-width: 860px; margin: 0 auto; }
+    details { border-top: 1px solid var(--line); }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 2px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-weight: 700;
+      font-size: .95rem;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; color: var(--gold); font-size: 1.35rem; font-weight: 500; }
+    details[open] summary::after { content: '−'; }
+    details p { margin: -5px 38px 22px 2px; color: var(--muted); font-size: .85rem; }
+
+    /* CTA */
+    .final-cta { padding: 110px 0 130px; background: var(--cream-2); }
+    .cta-box { background: var(--green); color: #fff; padding: 62px 56px; border-radius: 30px; text-align: center; box-shadow: 0 26px 70px rgba(16,35,31,.18); }
+    .cta-box h2 { max-width: 720px; margin: 0 auto 16px; color: #fff; }
+    .cta-box p { max-width: 650px; margin: 0 auto 28px; color: rgba(255,255,255,.7); }
+    .cta-box .btn { min-width: 220px; }
+    .cta-small { margin-top: 14px; font-size: .74rem; color: rgba(255,255,255,.48); }
+
+    /* FOOTER */
+    footer { background: #0a1815; color: #fff; padding: 50px 0 105px; }
+    .footer-grid { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 50px; }
+    .footer-brand p { max-width: 350px; color: rgba(255,255,255,.58); font-size: .83rem; }
+    footer h4 { margin: 0 0 13px; font-size: .72rem; letter-spacing: .11em; text-transform: uppercase; color: var(--gold-light); }
+    .footer-links { display: grid; gap: 8px; }
+    .footer-links a { color: rgba(255,255,255,.66); font-size: .8rem; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 35px; margin-top: 35px; border-top: 1px solid rgba(255,255,255,.09); color: rgba(255,255,255,.42); font-size: .72rem; }
+    .photo-credit { margin-top: 22px; color: rgba(255,255,255,.4); font-size: .67rem; line-height: 1.6; }
+    .photo-credit a { text-decoration: underline; }
+
+    /* FLOATING WHATSAPP */
+    .wa-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 120;
+      width: 64px;
+      height: 64px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #25D366;
+      color: #fff;
+      box-shadow: 0 16px 38px rgba(37,211,102,.28);
+      animation: pulse 1.7s infinite;
+    }
+    .wa-float svg { width: 29px; height: 29px; fill: currentColor; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 16px 38px rgba(37,211,102,.25); }
+      50% { transform: scale(1.07); box-shadow: 0 18px 44px rgba(37,211,102,.38), 0 0 0 12px rgba(37,211,102,.08); }
+    }
+    .wa-label {
+      position: fixed;
+      right: 97px;
+      bottom: 34px;
+      z-index: 119;
+      background: var(--green);
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 15px;
+      font-size: .72rem;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(16,35,31,.15);
+      animation: fadeLabel 1.2s ease 2.4s both;
+    }
+    @keyframes fadeLabel { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+
+    /* ANIMATION */
+    .reveal { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+    }
+
+    @media (max-width: 980px) {
+      .nav-links, .nav > .btn { display: none; }
+      .menu-btn { display: grid; place-items: center; }
+      .hero-grid, .intro-grid, .family-box, .truth-grid { grid-template-columns: 1fr; gap: 42px; }
+      .hero { min-height: auto; }
+      .hero-grid { padding-top: 128px; }
+      .hero-visual { min-height: 440px; }
+      .visual-card { min-height: 430px; width: min(560px, 100%); }
+      .visual-card img { min-height: 430px; }
+      .trust-box { grid-template-columns: 1fr 1.6fr; }
+      .trust-mini { display: none; }
+      .step-grid { grid-template-columns: repeat(2, 1fr); }
+      .offer-grid { grid-template-columns: repeat(2, 1fr); }
+      .offer-card.wide { grid-column: span 2; }
+      .package-grid { grid-template-columns: 1fr; }
+      .package-card.featured { transform: none; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+      .marquee-shell { margin-left: -20px; margin-right: -20px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      h1 { font-size: clamp(2.45rem, 13vw, 4rem); }
+      h2 { font-size: 2.2rem; }
+      .nav { min-height: 74px; }
+      .hero-grid { padding-top: 112px; padding-bottom: 65px; }
+      .hero-copy p { font-size: .96rem; }
+      .hero-actions { display: grid; grid-template-columns: 1fr; }
+      .hero-actions .btn { width: 100%; }
+      .hero-visual { min-height: 390px; }
+      .visual-card { min-height: 360px; border-radius: 24px; transform: none; }
+      .visual-card img { min-height: 360px; }
+      .floating-tag { font-size: .67rem; padding: 10px 12px; }
+      .floating-tag.top { top: 23px; left: -5px; }
+      .floating-tag.bottom { right: -5px; bottom: 25px; }
+      .trust-box { padding: 27px 24px; grid-template-columns: 1fr; gap: 10px; }
+      .trust-number { font-size: 4rem; }
+      .intro, .how, .offers, .gurdwaras, .packages, .why, .family, .truth, .global, .faq { padding: 82px 0; }
+      .intro-card { padding: 28px; }
+      .intro-card blockquote { font-size: 1.35rem; }
+      .step-grid, .offer-grid, .why-grid { grid-template-columns: 1fr; }
+      .offer-card.wide { grid-column: span 1; }
+      .offer-card { min-height: auto; }
+      .section-head { margin-bottom: 32px; }
+      .g-card { width: 235px; flex-basis: 235px; }
+      .g-card img { height: 180px; }
+      .package-card { min-height: auto; padding: 25px; }
+      .family-side, .global-box { padding: 28px; }
+      .cta-box { padding: 43px 22px; border-radius: 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-brand { grid-column: span 1; }
+      .footer-bottom { flex-direction: column; }
+      .wa-float { right: 16px; bottom: 16px; width: 58px; height: 58px; }
+      .wa-label { display: none; }
+      footer { padding-bottom: 100px; }
+    }
+  
+    h1 {font-size:clamp(2.8rem,4.7vw,4.3rem);line-height:1.08}
+    .hero {min-height:700px}
+    .hero-grid {gap:48px;padding-top:120px;padding-bottom:56px}
+    .hero-copy .hero-subtitle {font-size:clamp(1.1rem,2vw,1.5rem);color:var(--green);font-weight:600;margin-bottom:18px}
+    .trust-number {font-size:clamp(1.7rem,3vw,2.5rem)}
+    .price {font-size:1.45rem!important;line-height:1.3}
+    .request-grid {display:grid;grid-template-columns:1fr 1fr;gap:48px}
+    .request-form {background:white;padding:30px;border:1px solid var(--line);border-radius:24px;display:grid;gap:12px}
+    .request-form label {font-weight:600;font-size:.9rem}
+    .request-form input,.request-form textarea,.request-form select {width:100%;min-width:0;padding:12px;border:1px solid #87958e;border-radius:10px;font:inherit;background:white;color:var(--text)}
+    .request-help {font-size:.85rem;color:var(--muted)}
+    [hidden] {display:none!important}
+    :focus-visible {outline:3px solid #976622;outline-offset:5px}
+    .skip-link {position:fixed;top:-100px;left:16px;z-index:200;background:white;padding:12px;border-radius:8px}
+    .skip-link:focus {top:12px}
+    .marquee-shell {overflow-x:auto;margin:0 20px}
+    .marquee-track {animation:none!important;width:max-content}
+    @media(max-width:980px){.request-grid{grid-template-columns:1fr}.hero{min-height:0}.hero-grid{padding-top:110px}}
+    @media(max-width:640px){h1{font-size:2.65rem}.request-form{padding:22px}.hero-grid{gap:28px}.trust-number{font-size:1.8rem}.btn{white-space:normal;text-align:center}.eyebrow{letter-spacing:.08em;font-size:.7rem}}
+
+    /* Community sections inspired by the reference, adapted to MERI SUKHNA. */
+    .community-voices{padding:100px 0;background:#f0ecdf}
+    .voices-heading{display:flex;justify-content:space-between;align-items:center;gap:32px;margin-bottom:40px}
+    .voices-heading .section-head{margin:0;max-width:720px}
+    .voices-heading .btn{gap:18px;flex-shrink:0}
+    .community-voices h2 em,.community-trust h2 em{font-style:normal;color:#936c34}
+    .voices-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+    .voices-art{position:relative;min-height:390px;display:grid;place-items:center;border:1px solid rgba(16,35,31,.1);border-radius:28px;overflow:hidden;background:radial-gradient(ellipse at center,#e1d9c4 0,transparent 70%)}
+    .orbit{position:absolute;border:1px solid #c5b591;border-radius:50%;width:310px;height:310px;transform:rotate(-25deg) scaleX(1.6)}
+    .orbit-two{width:230px;height:230px;transform:rotate(35deg) scaleX(1.5)}
+    .voices-centre{position:relative;text-align:center;background:var(--cream);border:1px solid #d5c5a6;border-radius:50%;width:250px;height:250px;display:flex;flex-direction:column;justify-content:center;gap:15px;padding:25px;box-shadow:0 20px 55px #10231f0d}
+    .voices-centre>span{font-size:.6rem;letter-spacing:.14em;font-weight:700;color:#715a36}
+    .voices-centre strong{font-size:1.45rem;line-height:1.35;letter-spacing:-.04em}
+    .voice-place{position:absolute;padding:8px 15px;border-radius:30px;background:#fff;font-size:.74rem;font-weight:600;box-shadow:0 8px 30px #10231f0a;z-index:1}
+    .place-one{left:20px;top:40px}.place-two{right:20px;top:90px}.place-three{left:40px;bottom:30px}
+    .story-invitation{background:white;border:1px solid var(--line);border-radius:28px;padding:32px 38px;display:flex;flex-direction:column;align-items:flex-start}
+    .story-mark{font-family:Georgia,serif;color:#b08a4f;font-size:6rem;height:65px;line-height:1}
+    .story-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:#76633f;font-weight:600;margin-bottom:12px}
+    .story-invitation h3{font-size:1.55rem;letter-spacing:-.025em;line-height:1.35}
+    .story-invitation>p{font-size:.9rem;color:var(--muted)}
+    .story-foot{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line);width:100%}
+    .story-avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--cream-2);font-size:.75rem;font-weight:700;flex-shrink:0}
+    .story-foot p{margin:0;font-size:.75rem;color:var(--muted)}.story-foot strong{color:var(--green);font-size:.85rem}
+    .community-trust{padding:85px 0 0;background:var(--green);color:white;overflow:hidden}
+    .community-trust-head{display:grid;grid-template-columns:1.4fr 1fr;gap:70px;align-items:end;margin-bottom:45px}
+    .community-trust h2{font-size:clamp(2rem,3.8vw,3.3rem);margin:14px 0 0}.community-trust h2 em{color:var(--gold-light)}
+    .community-trust-head>p{color:#c2cfc8;font-size:.95rem;margin-bottom:4px}
+    .community-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #ffffff30;border-bottom:1px solid #ffffff30}
+    .community-fact{padding:30px 24px;border-right:1px solid #ffffff30}.community-fact:first-child{padding-left:0}.community-fact:last-child{border:0}
+    .fact-symbol{display:block;font-size:.63rem;letter-spacing:.12em;color:var(--gold-light);margin-bottom:20px}
+    .community-fact>strong{display:block;font-size:4rem;font-weight:600;letter-spacing:-.05em;line-height:1.2;margin-bottom:18px;color:var(--gold-light)}
+    .community-fact>strong.fact-world{font-size:clamp(1.5rem,2.3vw,2rem);letter-spacing:-.04em;min-height:77px;display:flex;align-items:center}
+    .community-fact h3{font-size:.95rem}.community-fact p{font-size:.8rem;color:#bdcdc5;margin-bottom:0}
+    .community-trust-foot{display:flex;justify-content:space-between;gap:24px;padding:25px 0;font-size:.8rem;color:#c2cfc8}.community-trust-foot a{color:var(--gold-light);font-weight:600}
+    @media(max-width:980px){.voices-heading{align-items:flex-start;flex-direction:column}.community-trust-head{gap:30px}.community-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.community-fact:nth-child(2){border-right:0}.community-fact:nth-child(-n+2){border-bottom:1px solid #ffffff30}.community-fact:first-child{padding-left:24px}}
+    @media(max-width:640px){.community-voices{padding:70px 0}.voices-layout,.community-trust-head{grid-template-columns:1fr;gap:24px}.voices-art{min-height:320px}.voices-centre{width:220px;height:220px}.place-two{top:65px;right:8px}.story-invitation{padding:26px}.community-trust{padding-top:65px}.community-fact{padding:24px 14px}.community-fact:first-child{padding-left:14px}.community-fact>strong{font-size:3.3rem}.community-fact>strong.fact-world{font-size:1.35rem;min-height:64px}.community-trust-foot{flex-direction:column;gap:12px}.fact-symbol{font-size:.55rem}}
+
+
+    /* Suggested palette: forest green, warm ivory, antique gold and soft sage. */
+    :root{--green:#12352d;--green-2:#214d40;--cream:#faf6ed;--cream-2:#eee6d5;--gold:#d6ad63;--gold-light:#edd5a3;--muted:#5e7067;--sage:#dce7df}
+    .eyebrow{color:#8b652d}.community-trust .eyebrow{color:var(--gold-light)}
+    .heading-translation{display:inline-block;font-size:.43em;letter-spacing:0;font-weight:500;line-height:1.5;color:var(--muted);margin-top:12px}
+    .btn-primary{background:linear-gradient(120deg,#dfbd7d,#d0a04f);color:#12352d}
+    .step-card,.offer-card,.why-card,.package-card,.story-invitation{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+    @media(hover:hover){.step-card:hover,.offer-card:hover,.why-card:hover,.story-invitation:hover{transform:translateY(-6px);box-shadow:0 20px 45px #12352d12;border-color:#c5a76d}}
+    .reveal.visible{animation:softEnter .65s both}.community-fact.visible{animation:softEnter .65s both}
+    .floating-tag{animation:gentleFloat 5s ease-in-out infinite}.floating-tag.bottom{animation-delay:-2.5s}
+    @keyframes softEnter{from{opacity:.25;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes gentleFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+    .quick-help{position:fixed;right:24px;bottom:106px;z-index:118;border:1px solid #ceb47e;border-radius:18px;background:var(--cream);color:var(--green);box-shadow:0 8px 28px #12352d20;padding:12px 18px;text-align:left;cursor:pointer;font-weight:700;font-size:.9rem}
+    .quick-help span{display:block;font-size:.66rem;font-weight:500;color:var(--muted);margin-top:3px}
+    .welcome-dialog{padding:0;border:1px solid #d7c7a2;border-radius:28px;width:min(820px,calc(100% - 32px));max-height:calc(100dvh - 40px);color:var(--green);background:var(--cream);box-shadow:0 30px 100px #0004;overflow-y:auto}
+    .welcome-dialog[open]{display:grid;grid-template-columns:.8fr 1.2fr;animation:softEnter .3s both}
+    .welcome-dialog::backdrop{background:#071d17a8;backdrop-filter:blur(5px)}
+    .popup-close{position:absolute;right:14px;top:14px;border:1px solid #12352d22;border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:1.5rem;color:var(--green);background:var(--cream);z-index:1}
+    .popup-art{background:radial-gradient(ellipse at 50% 45%,#315a46,var(--green) 75%);color:var(--gold-light);padding:40px 25px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:460px}
+    .popup-art>span{font-size:.7rem;letter-spacing:.15em;font-weight:700}.popup-art p{font-size:1.55rem;line-height:1.4;margin:24px 0}.popup-art small{font-size:.55rem;letter-spacing:.18em}
+    .popup-emblem{margin-top:32px;width:115px;height:115px;border:1px solid #d6ad6380;border-radius:50%;display:grid;place-items:center;font-family:Georgia,serif;font-size:2.5rem;box-shadow:0 0 0 12px #d6ad6309,0 0 0 24px #d6ad6306}
+    .popup-copy{padding:52px 34px 28px}.popup-copy h2{font-size:2.3rem;margin-top:16px}.popup-copy>p{font-size:.88rem;color:var(--muted)}.popup-copy ul{padding-left:20px;font-size:.8rem;margin:20px 0 26px}.popup-copy li{margin-bottom:8px}.popup-copy .btn{width:100%;gap:18px}
+    .popup-later{display:block;width:100%;padding:14px 0;background:transparent;border:0;text-decoration:underline;text-underline-offset:4px;font-size:.75rem;color:var(--green);cursor:pointer}.popup-copy .popup-note{text-align:center;font-size:.68rem;margin-bottom:0}
+    body:has(.welcome-dialog[open]){overflow:hidden}
+    @media(max-width:640px){.welcome-dialog[open]{grid-template-columns:1fr}.popup-art{min-height:0;padding:24px}.popup-emblem,.popup-art small{display:none}.popup-art p{font-size:1.1rem;margin:12px 0 0}.popup-copy{padding:28px 24px 20px}.popup-copy h2{font-size:2rem}.quick-help{right:16px;bottom:88px;padding:10px 14px}.popup-close{width:36px;height:36px}}
+    @media(prefers-reduced-motion:reduce){.reveal.visible,.community-fact.visible,.floating-tag,.welcome-dialog[open]{animation:none!important}.step-card:hover,.offer-card:hover,.why-card:hover,.story-invitation:hover{transform:none}}
+
+  </style>
+<style id="regionalGateStyles">html:not(.region-allowed) body>*:not(#regionGate){display:none!important}#regionGate{max-width:600px;margin:12vh auto;padding:32px;font-family:Poppins,sans-serif;color:#12352d}#regionGate h1{font-size:2rem;line-height:1.3}#regionGate button{padding:12px 24px;border:0;border-radius:30px;background:#12352d;color:white;cursor:pointer}.region-allowed #regionGate{display:none}.region-note{font-size:12px;line-height:1.6;color:#5e7067;padding:12px 0}</style><script src="regional-pricing.js" defer></script></head>
+<body><div id="regionGate" role="status"><h1>Checking service availability…</h1><p>We are checking your country to show the appropriate currency. This uses an IP-based country lookup from ipapi.co.</p><noscript>JavaScript is required to verify your region and display prices.</noscript></div><a class="skip-link" href="#top">Skip to content</a>
+
+  <!-- CENTRALIZED LINKS: replace only these values when your final WhatsApp number is ready -->
+  <script>
+    const REQUEST_URL = 'https://wa.me/919888188114';
+    const INSTAGRAM_URL = 'https://instagram.com/merisukhna';
+  </script>
+
+  <!-- HEADER -->
+  <header id="siteHeader">
+    <div class="container nav">
+      <a class="logo" href="#top" aria-label="MERI SUKHNA home">
+        MERI SUKHNA
+        <small>Complete Your Sukhna</small>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#how">How It Works</a>
+        <a href="#offer">What We Offer</a>
+        <a href="#packages">Packages</a>
+        <a href="#faq">FAQs</a>
+      </nav>
+
+      <a class="btn btn-dark" data-request href="#request">Request on WhatsApp</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#how">How It Works</a>
+      <a href="#offer">What We Offer</a>
+      <a href="#packages">Packages</a>
+      <a href="#faq">FAQs</a>
+      <a class="btn btn-dark" data-request href="#request">Request on WhatsApp</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">For families living away from Punjab</div>
+          <h1 lang="pa-Latn">Sukhna poori karvauni hai?</h1><p class="hero-subtitle" lang="pa-Latn">Punjab nahi aa sakde? Asi madad karange.</p>
+          <p>Arrange your request at a Gurdwara Sahib in Punjab, wherever you live. Tell us your preferred place and arrangements. We explain the options and cost before you decide.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" data-request href="#request">Request on WhatsApp</a>
+            <a class="btn btn-light" href="#packages">See Packages</a><a class="btn btn-light" href="customize.html">Build your package</a>
+          </div>
+          <div class="hero-note"><span></span> Clear price before we proceed</div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="floating-tag top"><span class="tag-dot"></span> Rumala Sahib</div>
+          <div class="visual-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sarovar%20and%20the%20Golden%20Temple.jpg?width=1200" alt="Sri Harmandir Sahib (Golden Temple), Amritsar" loading="eager">
+            <div class="visual-caption">
+              <span>Sri Harmandir Sahib</span>
+              <strong>Golden Temple · Amritsar</strong>
+            </div>
+          </div>
+          <div class="floating-tag bottom"><span class="tag-dot"></span> Video updates</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST -->
+    <section class="trust-wrap">
+      <div class="container">
+        <div class="trust-box reveal">
+          <div>
+            <div class="trust-number">Your request.</div>
+            <div class="trust-label">Clearly arranged.</div>
+          </div>
+          <div class="trust-copy">Your preferred Gurdwara Sahib. Agreed arrangements. A clear quote before confirmation. Updates after the visit.</div>
+          <div class="trust-mini">Simple process<br>Clear communication</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro" id="about">
+      <div class="container intro-grid">
+        <div class="intro-copy reveal">
+          <div class="eyebrow">The idea is simple</div>
+          <h2>You made a Sukhna. Now you want to complete it.</h2>
+          <p>Sometimes a wish comes true and you want to do what you had promised. Maybe it is an Akhand Paath Sahib, Sukhmani Sahib Paath, Rumala Sahib, Deg, Ardaas, Langar or another request at a Gurdwara Sahib.</p>
+          <p>But if you live outside Punjab, coming back yourself is not always possible.</p>
+          <div class="intro-points">
+            <div class="intro-point"><span class="check">✓</span><span>You tell us what you want to do.</span></div>
+            <div class="intro-point"><span class="check">✓</span><span>We explain the arrangements and price.</span></div>
+            <div class="intro-point"><span class="check">✓</span><span>We visit the Gurdwara Sahib and handle the agreed request.</span></div>
+          </div>
+        </div>
+
+        <div class="intro-card reveal">
+          <div class="quote-mark">“</div>
+          <blockquote>Tusi Punjab ton door ho, par apni Sukhna poori karva sakde ho.</blockquote>
+          <p>MERI SUKHNA is here to make the process easier when you cannot be there yourself.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how" id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">No complicated process</div>
+          <h2>Bas chaar kadam.<br><span class="heading-translation">How it works</span></h2>
+          <p>Just send us your request on WhatsApp. We will guide you from there.</p>
+        </div>
+        <div class="step-grid">
+          <article class="step-card reveal"><div class="step-num">01</div><h3>Send Your Request</h3><p>Tell us your Sukhna, preferred Gurdwara Sahib and what you want to arrange.</p></article>
+          <article class="step-card reveal"><div class="step-num">02</div><h3>We Share the Price</h3><p>We explain what can be arranged and tell you the price before you confirm.</p></article>
+          <article class="step-card reveal"><div class="step-num">03</div><h3>We Go to the Gurdwara Sahib</h3><p>Once confirmed, we will visit and complete the agreed request according to the Gurdwara Sahib's arrangements and maryada.</p></article>
+          <article class="step-card reveal"><div class="step-num">04</div><h3>You Get an Update</h3><p>Video recording and a WhatsApp update will be shared after the visit, where permitted.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE OFFER -->
+    <section class="offers" id="offer">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Your request, your way</div>
+          <h2>Asi ki madad kar sakde haan?<br><span class="heading-translation">What we can help with</span></h2>
+          <p>These are some of the things you can include in your request.</p>
+        </div>
+
+        <div class="offer-grid">
+          <article class="offer-card reveal"><div class="offer-icon">01</div><h3>Akhand Paath Sahib</h3><p>Want to arrange an Akhand Paath Sahib for your Sukhna? Tell us the Gurdwara Sahib and your requirements.</p></article>
+          <article class="offer-card reveal"><div class="offer-icon">02</div><h3>Sukhmani Sahib Paath</h3><p>Arrange a Sukhmani Sahib Paath for your Sukhna or for someone in your family.</p></article>
+          <article class="offer-card reveal"><div class="offer-icon">03</div><h3>Rumala Sahib</h3><p>We purchase the Rumala Sahib and take it to the requested Gurdwara Sahib according to its maryada and instructions.</p></article>
+          <article class="offer-card reveal"><div class="offer-icon">04</div><h3>Deg / Karah Prashad</h3><p>Include Deg / Karah Prashad as part of your request.</p></article>
+          <article class="offer-card reveal"><div class="offer-icon">05</div><h3>Ardaas</h3><p>Request an Ardaas and, where available, coordinate it with a Granthi Singh Ji.</p></article>
+          <article class="offer-card reveal"><div class="offer-icon">06</div><h3>Langar & Food Distribution</h3><p>Arrange Langar-related seva or distribution of fruits, samose, paranthe or other agreed items, subject to the Gurdwara Sahib's arrangements.</p></article>
+          <article class="offer-card wide reveal"><div class="offer-icon">07</div><h3>Other Paath / Special Request</h3><p>Have something else in mind? Tell us what you want to arrange. We will let you know what is possible and how the request can be handled.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GURDWARA SCROLLING SECTION -->
+    <section class="gurdwaras" id="gurdwaras">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Punjab</div>
+          <h2>Where would you like to arrange your request?</h2>
+          <p>Explore possible locations in Punjab. Availability and the arrangements allowed must be checked for each request.</p>
+        </div>
+      </div>
+
+      <div class="marquee-shell">
+        <div class="marquee-track">
+          <!-- SET 1 -->
+          <article class="g-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sarovar%20and%20the%20Golden%20Temple.jpg?width=900" alt="Sri Harmandir Sahib (Golden Temple), Amritsar" loading="lazy">
+            <div class="g-info"><div class="g-name">Sri Harmandir Sahib (Golden Temple)</div><div class="g-place">Amritsar</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Photograph%20of%20Gurdwara%20Shaheed%20Baba%20Deep%20Singh%20Ji%2C%20Amritsar%2C%20by%20Jasleen%20Kaur%2C%2011%20December%202008.jpg?width=900" alt="Gurdwara Shaheed Baba Deep Singh Ji, Amritsar" loading="lazy">
+            <div class="g-info"><div class="g-name">Gurdwara Shaheed Baba Deep Singh Ji</div><div class="g-place">Amritsar</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Baba%20Atal%20Amritsar.jpg?width=900" alt="Gurdwara Baba Atal Sahib, Amritsar" loading="lazy">
+            <div class="g-info"><div class="g-name">Gurdwara Baba Atal Sahib</div><div class="g-place">Amritsar</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Gurdwara%20Ramsar%20Sahib-Amritsar-India05.jpg?width=900" alt="Gurdwara Ramsar Sahib, Amritsar" loading="lazy">
+            <div class="g-info"><div class="g-name">Gurdwara Ramsar Sahib</div><div class="g-place">Amritsar</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/The_Sarovar_besides_the_GurudwaraTarn_Taran_Sahib%2C_Punjab%2C_India.jpg" alt="Gurdwara Sri Tarn Taran Sahib" loading="lazy">
+            <div class="g-info"><div class="g-name">Gurdwara Sri Tarn Taran Sahib</div><div class="g-place">Tarn Taran</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Ber_Sahib.jpg" alt="Gurdwara Ber Sahib, Sultanpur Lodhi" loading="lazy">
+            <div class="g-info"><div class="g-name">Gurdwara Sri Ber Sahib</div><div class="g-place">Sultanpur Lodhi</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Takhat_Sri_Kesgarh_Sahib%2C_Anandpur_Sahib_03.jpg" alt="Takht Sri Kesgarh Sahib, Anandpur Sahib" loading="lazy">
+            <div class="g-info"><div class="g-name">Takht Sri Kesgarh Sahib</div><div class="g-place">Sri Anandpur Sahib</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Takht%20Sri%20Damdama%20Sahib%20%28cropped%29.jpg?width=900" alt="Takht Sri Damdama Sahib, Talwandi Sabo" loading="lazy">
+            <div class="g-info"><div class="g-name">Takht Sri Damdama Sahib</div><div class="g-place">Talwandi Sabo</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Gurdwara%20Fatehgarh%20Sahib.jpg?width=900" alt="Gurdwara Fatehgarh Sahib" loading="lazy">
+            <div class="g-info"><div class="g-name">Gurdwara Sri Fatehgarh Sahib</div><div class="g-place">Fatehgarh Sahib</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dukhniwaran%20Sahib.jpg?width=900" alt="Gurdwara Dukh Niwaran Sahib, Ludhiana" loading="lazy">
+            <div class="g-info"><div class="g-name">Gurdwara Dukh Niwaran Sahib</div><div class="g-place">Ludhiana</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Maingate%20alamgir.JPG?width=900" alt="Gurdwara Manji Sahib Alamgir, Ludhiana" loading="lazy">
+            <div class="g-info"><div class="g-name">Gurdwara Manji Sahib</div><div class="g-place">Alamgir, Ludhiana</div></div>
+          </article>
+          <article class="g-card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Gurudwara%20Goindwal%20Sahib.jpg?width=900" alt="Gurdwara Goindwal Sahib" loading="lazy">
+            <div class="g-info"><div class="g-name">Gurdwara Goindwal Sahib</div><div class="g-place">Goindwal Sahib</div></div>
+          </article>
+          
+          
+
+          <!-- SET 2: duplicate for seamless scroll -->
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </div>
+      </div>
+
+      <div class="container">
+        <p class="gurdwara-note"><strong>Have another Gurdwara Sahib in mind?</strong> Send us the name on WhatsApp. We will check the request and guide you.</p>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section class="packages" id="packages">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Choose what suits your request</div>
+          <h2>Tuhadi lorh, tuhadi chon.<br><span class="heading-translation">Choose your coordination option</span></h2>
+          <p>Choose the level of coordination and updates you need. Every request is quoted individually; these options describe arrangements, not spiritual outcomes.</p>
+        </div>
+
+        <p class="region-note" data-region-note></p><div class="package-grid">
+          <article class="package-card reveal">
+            <div class="package-name">Basic</div>
+            <div class="package-title">For visit coordination</div>
+            <div class="package-desc">Standard visit arrangements and an update. Completed within 1 week.</div>
+            <div class="feature-list">
+              <div class="feature">Gurdwara Sahib visit</div>
+              <div class="feature">Rumala Sahib, if agreed in your quote</div>
+              <div class="feature">Deg / Karah Prashad, if agreed</div>
+              <div class="feature">Ardaas coordination, subject to availability</div>
+              <div class="feature">Video update, where recording is permitted</div>
+              <div class="feature">WhatsApp update</div>
+            </div>
+            <div class="package-price">
+              <div class="price" data-package-price="Basic">Checking local price…</div>
+              <div class="price-note">Written scope and total cost before confirmation</div>
+              <a class="btn btn-dark" href="customize.html?package=Basic">Customise Basic</a>
+            </div>
+          </article>
+
+          <article class="package-card featured reveal">
+            <div class="package-badge">RECOMMENDED</div>
+            <div class="package-name">Plus</div>
+            <div class="package-title">For additional arrangements</div>
+            <div class="package-desc">Discuss Paath, Langar or distribution alongside your visit. Completed within 1 week.</div>
+            <div class="feature-list">
+              <div class="feature">Everything in Basic</div>
+              <div class="feature">Granthi Singh Ji coordination, where available</div>
+              <div class="feature">Visit updates, where permitted</div>
+              <div class="feature">Langar seva, if agreed</div>
+              <div class="feature">Food distribution: items and quantities agreed in quote</div>
+              <div class="feature">Paath arrangements, if requested</div>
+              <div class="feature">Video update, where recording is permitted</div>
+              <div class="feature">WhatsApp update</div>
+            </div>
+            <div class="package-price">
+              <div class="price" data-package-price="Plus">Checking local price…</div>
+              <div class="price-note">Written scope and total cost before confirmation</div>
+              <a class="btn btn-primary" href="customize.html?package=Plus">Customise Plus</a>
+            </div>
+          </article>
+
+          <article class="package-card premium reveal">
+            <div class="package-badge">LIVE VIDEO CALL</div>
+            <div class="package-name">Complete · Premium</div>
+            <div class="package-title">For those who want to be part of the visit</div>
+            <div class="package-desc">Choose a preferred date and request a family live video call. Both are exclusive to Complete Premium and subject to availability and permissions.</div>
+            <div class="feature-list">
+              <div class="feature">Plus arrangements with premium scheduling</div><div class="feature">Preferred date, subject to confirmation</div>
+              <div class="feature"><strong>Live call, subject to permission and connectivity</strong></div>
+              <div class="feature">Join the Gurdwara visit live</div>
+              <div class="feature">Family members can join the call</div>
+              <div class="feature">Live Ardaas, where permitted</div>
+              <div class="feature">Rumala Sahib offering, where permitted</div>
+              <div class="feature">Langar & food distribution</div>
+              <div class="feature">Paath arrangements, if requested</div>
+              <div class="feature">Permitted recording + final update</div>
+            </div>
+            <div class="package-price">
+              <div class="price" data-package-price="Complete">Checking local price…</div>
+              <div class="price-note">Written scope and total cost before confirmation</div>
+              <a class="btn btn-primary" href="customize.html?package=Complete">Customise Complete</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="pricing-note reveal"><strong>Additions da kharcha vakhra hovega.</strong> Additions are charged extra at the prices available at the shop. We will confirm the item prices, quantities and total extra cost with you before proceeding.<br><br><strong>Price pehlan hi clear hovega.</strong> Your quote should specify the visit, requested items and quantities, Paath or Langar arrangements, coordination charges and total cost. Availability, recording and live calls depend on the Gurdwara Sahib’s maryada and permissions. Only the arrangements confirmed in your quote are included.</div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="why" id="why">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Simple & clear</div>
+          <h2>Why MERI SUKHNA?</h2>
+          <p>We want you to know what is happening and what you are paying for.</p>
+        </div>
+        <div class="why-grid">
+          <article class="why-card reveal"><span>01</span><h3>Clear Price</h3><p>You know the price before you confirm the request.</p></article>
+          <article class="why-card reveal"><span>02</span><h3>Clear Details</h3><p>We discuss what is included before we move ahead.</p></article>
+          <article class="why-card reveal"><span>03</span><h3>WhatsApp Updates</h3><p>Easy communication before and after the visit.</p></article>
+          <article class="why-card reveal"><span>04</span><h3>No Need to Travel</h3><p>When Punjab aauna possible nahi, we help with the request here.</p></article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- FAMILY VOICES: publish only consented, verified customer stories -->
+    <section class="community-voices" id="voices" aria-labelledby="voices-title">
+      <div class="container">
+        <div class="voices-heading">
+          <div class="section-head"><div class="eyebrow">Connected through faith</div>
+            <h2 id="voices-title" lang="pa-Latn">Duniya de har kone ton,<br><em>apneya di awaaz.</em></h2>
+            <p>Voices from every corner. Har parivaar di apni kahaani, har Sukhna naal apna jazba.</p>
+          </div>
+          <a class="btn btn-light" href="https://wa.me/919888188114?text=Sat%20Sri%20Akal%2C%20I%20would%20like%20to%20share%20my%20MERI%20SUKHNA%20experience.">Apni kahaani sanjhi karo <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="voices-layout">
+          <div class="voices-art" aria-hidden="true">
+            <span class="orbit orbit-one"></span><span class="orbit orbit-two"></span>
+            <span class="voice-place place-one">Canada</span><span class="voice-place place-two">United Kingdom</span><span class="voice-place place-three">Australia</span>
+            <div class="voices-centre"><span>MERI SUKHNA</span><strong>Door reh ke vi,<br>dil Punjab vich.</strong><span>FAMILY · FAITH · CONNECTION</span></div>
+          </div>
+          <article class="story-invitation">
+            <div class="story-mark" aria-hidden="true">“</div>
+            <span class="story-label">A space for your stories</span>
+            <h3>Tuhadi kahaani, kise hor parivaar da hausla.</h3>
+            <p>Have you arranged a request through MERI SUKHNA? Share what it meant to your family — Punjabi jaan English, jiven tuhanu changa lagge.</p>
+            <div class="story-foot"><span class="story-avatar" aria-hidden="true">MS</span><p><strong>Family stories coming soon</strong><br>Shared with permission, in your own words.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRANSPARENCY -->
+    <section class="truth" id="truth">
+      <div class="container truth-grid">
+        <div class="reveal">
+          <div class="eyebrow">We want to keep this clear</div>
+          <h2>We help complete the request. We don't promise a result.</h2>
+        </div>
+        <div class="truth-copy reveal">
+          <p>MERI SUKHNA helps you arrange and complete your Sukhna. We can coordinate the visit, Paath, Rumala Sahib, Deg, Ardaas, Langar and other agreed parts of your request.</p>
+          <p>Gurdwara names and photographs identify possible locations. They do not imply an official partnership or endorsement. Each location’s maryada and permissions take priority.</p>
+          <p>Our responsibility is to handle the request honestly, explain what we can do and keep you updated.</p>
+          <div class="truth-callout">Your faith is personal. Our job is to help with your request.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-head reveal" style="margin-left:auto;margin-right:auto;text-align:center;">
+          <div class="eyebrow">Need to know something?</div>
+          <h2>Tuhade sawaal.<br><span class="heading-translation">Frequently asked questions</span></h2>
+          <p>Some common questions before you send your request.</p>
+        </div>
+        <div class="faq-list reveal"><details><summary>How long does it take? Can I choose a date?</summary><p>Basic and Plus requests are completed within 1 week. Preferred dates and live video calls are exclusive to Complete Premium. Premium dates must be confirmed based on Gurdwara Sahib availability.</p></details><details><summary>What should I confirm before paying?</summary><p>Ask for the coordinator’s name and contact details, the agreed date and scope, an itemised total, payment instructions and the receipt arrangements. Confirm cancellation, rescheduling and refund terms in writing before making a payment.</p></details><details><summary>What if my date or arrangements are unavailable?</summary><p>Availability must be checked before confirmation. Ask which alternatives are possible and agree what happens if arrangements change, including any costs or refund terms, before paying.</p></details><details><summary>Is this an official Gurdwara website?</summary><p>This website presents MERI SUKHNA’s request coordination service. Gurdwara names and photographs identify locations; they do not establish endorsement or an official partnership. Confirm any claimed affiliation directly with the relevant Gurdwara Sahib.</p></details>
+          <details><summary>Can I make a request from outside India?</summary><p>Yes. You can send your request from anywhere in the world through WhatsApp.</p></details>
+          <details><summary>What if I already know the Gurdwara Sahib?</summary><p>Just tell us the name when you send your request. We will check the arrangements and guide you.</p></details>
+          <details><summary>Can you help with Akhand Paath Sahib or Sukhmani Sahib Paath?</summary><p>Yes. Tell us what you want to arrange and we will explain the available options, process and price.</p></details>
+          <details><summary>Do you provide Rumala Sahib?</summary><p>Yes. We can purchase the Rumala Sahib and take it to the requested Gurdwara Sahib according to its maryada and instructions.</p></details>
+          <details><summary>Can I add Deg / Karah Prashad?</summary><p>Yes. Deg / Karah Prashad can be included in your request.</p></details>
+          <details><summary>Can you arrange Ardaas with a Granthi Singh Ji?</summary><p>We can request or coordinate this where available and subject to the Gurdwara Sahib's arrangements.</p></details>
+          <details><summary>Can I request Langar or food distribution?</summary><p>Yes. You can request Langar-related arrangements or distribution of fruits, samose, paranthe and other agreed items, subject to the Gurdwara Sahib's arrangements.</p></details>
+          <details><summary>Can I see the visit live?</summary><p>A live call can be requested with the Complete option. It depends on permission, network coverage and scheduling. Ask what update will be provided if a call cannot go ahead.</p></details>
+          <details><summary>Will I receive a video?</summary><p>We can share a recording where permitted. Recording is never guaranteed in restricted areas; agree the available update format before confirming.</p></details>
+          <details><summary>Can I make the request for someone else?</summary><p>Yes. You can make a request for your parents, grandparents, spouse, children or another family member.</p></details>
+          <details><summary>How much does it cost?</summary><p>It depends on what you want to arrange and the Gurdwara Sahib involved. We will tell you the price before you confirm.</p></details>
+          <details><summary>What can I expect regarding my Sukhna and my request?</summary><p>Our focus is to carefully arrange your request and keep you updated throughout the process.</p></details>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SERVICE FACTS: replace with customer metrics only after verification -->
+    <section class="community-trust" id="community" aria-labelledby="community-title">
+      <div class="container">
+        <div class="community-trust-head"><div><div class="eyebrow">Care in every arrangement</div><h2 id="community-title" lang="pa-Latn">Bharose da saath.<br><em>Punjab naal judaav.</em></h2></div><p>Clear arrangements, wherever you live. Pehli gall ton aakhri update tak — saari jaankaari, saaf-saaf.</p></div>
+        <div class="community-facts">
+          <div class="community-fact"><span class="fact-symbol" aria-hidden="true">01 / OPTIONS</span><strong>3</strong><h3>Coordination options</h3><p>Basic, Plus and Complete — choose the support you need.</p></div>
+          <div class="community-fact"><span class="fact-symbol" aria-hidden="true">02 / ARRANGEMENTS</span><strong>7</strong><h3>Ways we can help</h3><p>Explore Paath, Rumala Sahib, Deg, Ardaas and other requests.</p></div>
+          <div class="community-fact"><span class="fact-symbol" aria-hidden="true">03 / COMMUNICATION</span><strong>1</strong><h3>Direct WhatsApp contact</h3><p>Discuss your arrangements and receive updates in one conversation.</p></div>
+          <div class="community-fact"><span class="fact-symbol" aria-hidden="true">04 / CONNECTION</span><strong class="fact-world">Worldwide</strong><h3>Enquiries welcome</h3><p>Send your request from wherever you and your family live.</p></div>
+        </div>
+        <div class="community-trust-foot"><span>Your faith is personal. The arrangements should be clear.</span><a href="#request">Discuss your request <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+
+<section class="intro" id="request"><div class="container request-grid"><div><div class="eyebrow">Start with the details</div><h2>Apni Sukhna baare dasso.</h2><p>Tell us what you would like to arrange, then send your enquiry on WhatsApp. Apne layi jaan parivaar layi — tusi jithe vi ho, saade naal gall karo.</p><p><strong>Call or WhatsApp:</strong> <a href="tel:+919888188114">+91 98881 88114</a></p><p class="request-help">This form prepares a message on your device. Nothing is sent until you send it in WhatsApp. Please leave out payment details and sensitive personal information.</p></div><form id="requestForm" class="request-form"><label for="requestPlace">Preferred Gurdwara Sahib</label><input id="requestPlace" name="place" maxlength="160" required placeholder="Name and city, or ask us for guidance"><label for="requestType">Coordination option</label><select id="requestType" name="option"><option>Help me choose</option><option>Basic</option><option>Plus</option><option>Complete</option></select><label for="requestDetails">What would you like to arrange?</label><textarea id="requestDetails" name="details" maxlength="1500" rows="4" required placeholder="Arrangements and your time zone (preferred dates: Complete Premium only)"></textarea><button class="btn btn-dark" type="submit">Enquiry tayaar karo</button><p id="requestStatus" role="status"></p><a id="sendRequest" class="btn btn-primary" hidden>WhatsApp te gall karo</a></form></div></section>
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2>Sukhna poori karvauni hai?</h2>
+          <p>You don't have to figure everything out yourself. Send us your request, tell us what you want to arrange and where.</p>
+          <a class="btn btn-primary" data-request href="#request">WhatsApp Te Request Karo</a>
+          <div class="cta-small">Asi tuhanu saari details samjha devange.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">MERI SUKHNA<small style="color:rgba(255,255,255,.45);">Complete Your Sukhna</small></div>
+          <p>Helping you complete your Sukhna when you cannot be there yourself.</p>
+          <div class="photo-credit">Gurdwara names referenced from SGPC listings. Gurdwara photographs are linked to Wikimedia Commons sources and their respective licenses.</div>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <div class="footer-links">
+            <a href="#how">How It Works</a>
+            <a href="#offer">What We Offer</a>
+            <a href="#gurdwaras">Gurdwara Sahibs</a>
+            <a href="#packages">Packages</a>
+            <a href="#faq">FAQs</a>
+          </div>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <div class="footer-links">
+            <a data-request href="#request">WhatsApp</a>
+            <a data-instagram href="https://instagram.com/merisukhna">@merisukhna</a>
+            <a href="https://merisukhna.in">merisukhna.in</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 MERI SUKHNA. All rights reserved.</span>
+        <span>Simple process. Clear communication.</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <button class="quick-help" id="quickHelp" type="button" aria-haspopup="dialog" aria-controls="welcomeDialog">Gall kariye? <span>Quick enquiry ↗</span></button>
+  <dialog class="welcome-dialog" id="welcomeDialog" aria-labelledby="welcomeTitle" aria-describedby="welcomeDescription">
+    <button class="popup-close" id="closeWelcome" type="button" aria-label="Close enquiry popup" autofocus>×</button>
+    <div class="popup-art" aria-hidden="true"><span>MERI SUKHNA</span><div class="popup-emblem">MS</div><p>Dooriyaan ne,<br>par judaav vi hai.</p><small>FAMILY · FAITH · PUNJAB</small></div>
+    <div class="popup-copy"><div class="eyebrow">Sat Sri Akal Ji</div><h2 id="welcomeTitle" lang="pa-Latn">Punjab nahi aa sakde?</h2><p id="welcomeDescription">Tell us what you would like to arrange at a Gurdwara Sahib. Asi options te keemat samjha devange — phir tusi faisla karo.</p><ul><li>Your preferred Gurdwara Sahib</li><li>Clear quote before confirmation</li><li>Updates on your agreed arrangements</li></ul><a class="btn btn-primary" id="popupRequest" href="#request">Apni request dasso <span aria-hidden="true">↗</span></a><button class="popup-later" id="laterWelcome" type="button">Hale website vekhni hai · Keep exploring</button><p class="popup-note">Punjabi jaan English — jiven tusi comfortable ho.</p></div>
+  </dialog>
+
+  <!-- FLOATING WHATSAPP -->
+  <a class="wa-float" data-request href="#request" aria-label="Chat with MERI SUKHNA on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.9 11.9 0 0 0 12.05 0C5.5 0 .17 5.32.17 11.87c0 2.09.55 4.13 1.59 5.93L.06 24l6.34-1.66a11.88 11.88 0 0 0 5.65 1.43h.01c6.54 0 11.86-5.32 11.86-11.87 0-3.17-1.24-6.15-3.4-8.42ZM12.06 21.8h-.01a9.88 9.88 0 0 1-5.04-1.38l-.36-.21-3.76.98 1-3.67-.23-.38a9.86 9.86 0 0 1-1.52-5.27C2.14 6.44 6.58 2 12.06 2a9.83 9.83 0 0 1 7 2.9 9.84 9.84 0 0 1 2.91 7.01c0 5.48-4.45 9.89-9.91 9.89Zm5.42-7.4c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.39-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.21 5.08 4.5.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.19-.57-.34Z"/></svg>
+  </a>
+  <div class="wa-label">Chat on WhatsApp</div>
+
+  <script>
+    // Apply centralized links to every CTA.
+    document.querySelectorAll('[data-request]').forEach(el => {
+      el.href = '#request';
+      if (el.classList.contains('wa-float')) el.setAttribute('aria-label','Prepare your WhatsApp enquiry');
+      el.addEventListener('click', () => {
+        const card = el.closest('.package-card');
+        if (card) document.getElementById('requestType').value = card.querySelector('.package-name').textContent;
+      });
+    });
+    const requestForm = document.getElementById('requestForm');
+    const sendRequest = document.getElementById('sendRequest');
+    requestForm.addEventListener('input', () => { sendRequest.hidden = true; document.getElementById('requestStatus').textContent = ''; });
+    requestForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const message = ['Sat Sri Akal, I would like to enquire about a request.', 'Gurdwara Sahib: ' + requestForm.elements.place.value.trim(), 'Option: ' + requestForm.elements.option.value, 'Details: ' + requestForm.elements.details.value.trim(), 'Please share availability, an itemised quote, payment and cancellation terms.'].join('\n');
+      sendRequest.href = REQUEST_URL + '?text=' + encodeURIComponent(message);
+      sendRequest.hidden = false;
+      document.getElementById('requestStatus').textContent = 'Enquiry tayaar hai. Review your message and send it in WhatsApp.';
+    });
+    document.querySelectorAll('[data-instagram]').forEach(el => el.href = INSTAGRAM_URL);
+
+
+    // Native dialog supplies modal focus management and Escape dismissal.
+    const welcomeDialog = document.getElementById('welcomeDialog');
+    const quickHelp = document.getElementById('quickHelp');
+    let welcomeTimer;
+    function rememberWelcome(){clearTimeout(welcomeTimer);try{sessionStorage.setItem('meriSukhnaWelcomeSeen','yes');}catch{}}
+    function openWelcome(){rememberWelcome();if(typeof welcomeDialog.showModal==='function'&&!welcomeDialog.open)welcomeDialog.showModal();else if(typeof welcomeDialog.showModal!=='function')location.hash='request';}
+    quickHelp.addEventListener('click',openWelcome);
+    document.getElementById('closeWelcome').addEventListener('click',()=>welcomeDialog.close());
+    document.getElementById('laterWelcome').addEventListener('click',()=>welcomeDialog.close());
+    welcomeDialog.addEventListener('close',rememberWelcome);
+    welcomeDialog.addEventListener('cancel',rememberWelcome);
+    document.getElementById('popupRequest').addEventListener('click',()=>{welcomeDialog.close();setTimeout(()=>document.getElementById('requestPlace').focus({preventScroll:true}),100);});
+    let welcomeSeen=false;try{welcomeSeen=!!sessionStorage.getItem('meriSukhnaWelcomeSeen');}catch{welcomeSeen=true;}
+    if(!welcomeSeen)welcomeTimer=setTimeout(()=>{if(!document.hidden&&!document.querySelector('input:focus,textarea:focus,select:focus')&&location.hash!=='#request')openWelcome();},12000);
+    document.querySelectorAll('[data-request],#requestForm').forEach(el=>el.addEventListener('click',rememberWelcome));
+    if('IntersectionObserver' in window){const factsObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');factsObserver.unobserve(entry.target);}}),{threshold:.15});document.querySelectorAll('.community-fact').forEach((el,i)=>{el.style.animationDelay=(i*80)+'ms';factsObserver.observe(el);});}
+
+    // Header scroll state
+    const header = document.getElementById('siteHeader');
+    const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 18);
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); menuBtn.focus();
+      }
+    });
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
