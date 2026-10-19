@@ -6,7 +6,7 @@
   let regional = null;
   window.packagePriceText = pack => regional ? format(prices[pack] * regional.rate, regional.currency) : 'Price unavailable until region is verified';
   function format(value, currency) {
-    return new Intl.NumberFormat('en', { style: 'currency', currency, currencyDisplay: 'code', maximumFractionDigits: 2 }).format(value);
+    return new Intl.NumberFormat('en', { style: 'currency', currency, currencyDisplay: 'code', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(Math.ceil(Number((value / 10).toFixed(10))) * 10);
   }
   function showGate(title, message, retry = false) {
     root.classList.remove('region-allowed');
@@ -49,7 +49,7 @@
       render();
       document.dispatchEvent(new Event('regional-prices-ready'));
       document.querySelectorAll('[data-region-note]').forEach(el => {
-        el.textContent = regional ? 'Prices in ' + currency + ' for ' + geo.country_name + '. ' + (currency === 'CAD' ? 'Package prices exclude additions.' : 'Converted package estimates' + (rateDate ? ' using rates dated ' + rateDate : '') + '; final amount confirmed before proceeding.') + ' Additions are charged extra at shop prices.' : 'Local currency pricing is temporarily unavailable. No alternate currency is shown. Please request a quote on WhatsApp.';
+        el.textContent = regional ? 'Prices in ' + currency + ' for ' + geo.country_name + '. ' + (currency === 'CAD' ? 'Package prices exclude additions.' : 'Converted package estimates' + (rateDate ? ' using rates dated ' + rateDate : '') + ', rounded up to the next 10; final amount confirmed before proceeding.') + ' Additions are charged extra at shop prices.' : 'Local currency pricing is temporarily unavailable. No alternate currency is shown. Please request a quote on WhatsApp.';
       });
       root.classList.add('region-allowed');
       document.addEventListener('change', render);
