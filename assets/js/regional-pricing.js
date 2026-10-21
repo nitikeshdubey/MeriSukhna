@@ -7,13 +7,13 @@
   const ownScript=document.currentScript?.src;
   async function ownerAccess(interactive=false) {
     try {
-      if(!interactive&&!sessionStorage.getItem('ms-session-v1'))return false;
+      if(!interactive&&!window.MS_API?.recovery&&!sessionStorage.getItem('ms-session-v1'))return false;
       const assetBase=new URL('.',ownScript);
       for(const file of ['backend-config.js','backend.js']) { if(file==='backend-config.js'&&window.MS_BACKEND||file==='backend.js'&&window.MS_API)continue;await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=new URL(file,assetBase);script.onload=resolve;script.onerror=reject;document.head.append(script);}); }
-      if(!window.MS_API.user)return false;
+      if(!window.MS_API.user&&!window.MS_API.recovery)return false;
       if(await MS_API.rpc('ms_is_staff',{})!==true)return false;
-      root.classList.add('region-allowed');
-      if(!document.getElementById('ownerPreviewBanner')){const banner=document.createElement('div');banner.id='ownerPreviewBanner';banner.className='owner-preview-banner';banner.textContent='Owner preview · Public country restrictions remain active. ';const exit=document.createElement('button');exit.textContent='Sign out of preview';exit.onclick=async()=>{await MS_API.logout();location.reload();};banner.append(exit);document.body.prepend(banner);}return true;
+      root.classList.add('region-allowed'); regional={currency:'CAD',rate:1};render();document.dispatchEvent(new Event('regional-prices-ready'));
+      if(!document.getElementById('ownerPreviewBanner')){const banner=document.createElement('div');banner.id='ownerPreviewBanner';banner.className='owner-preview-banner';banner.textContent='Owner preview · Sample CAD prices · Public country restrictions remain active. ';const exit=document.createElement('button');exit.textContent='Sign out of preview';exit.onclick=async()=>{await MS_API.logout();location.reload();};banner.append(exit);document.body.prepend(banner);}return true;
     }catch{return false;}
   }
   function ownerForm(gate){const toggle=document.createElement('button');toggle.textContent='Owner / staff sign-in';toggle.type='button';gate.append(toggle);toggle.onclick=()=>{toggle.disabled=true;const form=document.createElement('form'),email=document.createElement('input'),password=document.createElement('input'),submit=document.createElement('button'),message=document.createElement('p');email.type='email';email.autocomplete='username';email.required=true;email.placeholder='Staff email';email.setAttribute('aria-label','Staff email');password.type='password';password.autocomplete='current-password';password.required=true;password.placeholder='Password';password.setAttribute('aria-label','Password');submit.textContent='Sign in to owner preview';message.setAttribute('role','status');form.append(email,password,submit,message);gate.append(form);form.onsubmit=async event=>{event.preventDefault();submit.disabled=true;try{await ownerAccess(true);await MS_API.login(email.value.trim(),password.value);password.value='';if(!await ownerAccess(true))throw Error('This account does not have staff access.');location.reload();}catch(error){message.textContent=error.message;}finally{submit.disabled=false;}};email.focus();};}

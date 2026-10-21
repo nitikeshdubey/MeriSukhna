@@ -27,7 +27,7 @@
 
 // Homepage photographs: random order, five-second cadence, progressive loading.
 (() => {
- const slides=[{"src":"assets/images/gurdwara-01.webp","alt":"Sri Harmandir Sahib (Golden Temple), Amritsar","name":"Sri Harmandir Sahib (Golden Temple)","place":"Amritsar"},{"src":"assets/images/gurdwara-11.webp","alt":"Gurdwara Sri Tarn Taran Sahib","name":"Gurdwara Sri Tarn Taran Sahib","place":"Tarn Taran"},{"src":"https://upload.wikimedia.org/wikipedia/commons/a/a1/Ber_Sahib.jpg","alt":"Gurdwara Ber Sahib, Sultanpur Lodhi","name":"Gurdwara Sri Ber Sahib","place":"Sultanpur Lodhi"},{"src":"https://upload.wikimedia.org/wikipedia/commons/5/53/Takhat_Sri_Kesgarh_Sahib%2C_Anandpur_Sahib_03.jpg","alt":"Takht Sri Kesgarh Sahib, Anandpur Sahib","name":"Takht Sri Kesgarh Sahib","place":"Sri Anandpur Sahib"}];
+ const slides=[{"src":"assets/images/gurdwara-01.webp","alt":"Sri Harmandir Sahib (Golden Temple), Amritsar","name":"Sri Harmandir Sahib (Golden Temple)","place":"Amritsar"},{"src":"assets/images/gurdwara-11.webp","alt":"Gurdwara Sri Tarn Taran Sahib","name":"Gurdwara Sri Tarn Taran Sahib","place":"Tarn Taran"},{"src":"assets/images/gurdwara-12.webp","alt":"Gurdwara Ber Sahib, Sultanpur Lodhi","name":"Gurdwara Sri Ber Sahib","place":"Sultanpur Lodhi"},{"src":"assets/images/gurdwara-13.webp","alt":"Takht Sri Kesgarh Sahib, Anandpur Sahib","name":"Takht Sri Kesgarh Sahib","place":"Sri Anandpur Sahib"}];
  const carousel=document.getElementById('heroCarousel');if(!carousel)return;
  const caption=document.getElementById('heroCaption');const controls=carousel.querySelector('.hero-carousel-controls');
  const dots=[...carousel.querySelectorAll('.hero-dot')],pause=carousel.querySelector('.hero-pause');
