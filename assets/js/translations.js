@@ -37,3 +37,5 @@ Object.assign(window.MS_TRANSLATIONS,{
  'This guide explains practical coordination. Confirm religious practice and local requirements with the relevant Gurdwara Sahib.':'Eh lekh bandobast di jaankari dinda hai. Dharam di maryada te sthaanik lorhaan sambandhit Gurdwara Sahib naal pakkiyan karo.',
  'Choose your Gurdwara Sahib and arrangements. We confirm availability, inclusions and costs before you decide. Additions are charged extra at shop prices.':'Apna Gurdwara Sahib te bandobast chuno. Tuhade faisle ton pehlan asi uplabdhata, shamil cheezaan te kharcha pakka karange. Vaadhu cheezaan dukaan di keemat te vakhriyaan han.'
 });
+
+Object.assign(window.MS_TRANSLATIONS,{'Saved packages & account drafts':'Save kite packages te account drafts','Read all FAQs & terms →':'Saare sawaal te shartaan parho →','Choose your arrangements in the package builder':'Package builder vich apne bandobast chuno','base · additions extra':'mool keemat · vaadhu bandobast vakhre'});
