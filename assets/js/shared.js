@@ -16,7 +16,7 @@
  const originals=new WeakMap();
  function translate(root=document.body){const walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;while(node=walk.nextNode()){if(node.parentElement?.closest('script,style,textarea,[data-user-content],.ms-language'))continue;const raw=originals.get(node)??node.nodeValue;if(!originals.has(node))originals.set(node,raw);const trimmed=raw.trim();const value=lang==='pa'&&dictionary[trimmed]?raw.replace(trimmed,dictionary[trimmed]):raw;if(node.nodeValue!==value)node.nodeValue=value;}
  document.querySelectorAll('option:not([value])').forEach(option=>option.setAttribute('value',originals.get(option.firstChild)||option.textContent));
- document.querySelectorAll('.ms-language').forEach(b=>{b.textContent=lang==='pa'?'English':'Punjabi';b.setAttribute('aria-label',lang==='pa'?'Switch to English':'Switch to Punjabi');});document.documentElement.lang=lang==='pa'?'pa-Latn':'en';}
+ document.querySelectorAll('.ms-language').forEach(b=>{const label=lang==='pa'?'English':'Punjabi';if(b.textContent!==label)b.textContent=label;b.setAttribute('aria-label',lang==='pa'?'Switch to English':'Switch to Punjabi');});document.documentElement.lang=lang==='pa'?'pa-Latn':'en';}
  window.MS_I18N={get language(){return lang;},t:text=>lang==='pa'?(dictionary[text]||text):text,translate};
  // Preserve option values before translating their labels.
  document.querySelectorAll('option:not([value])').forEach(option=>option.value=option.textContent);

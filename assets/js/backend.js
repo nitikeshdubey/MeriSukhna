@@ -1,6 +1,8 @@
 /* Small Supabase REST client. No credentials are bundled in the website. */
 (() => {
  const config=window.MS_BACKEND||{},key='ms-session-v1';let session=null,refreshing=null;
+ // Email confirmation is followed by an explicit sign-in; never leave tokens in the URL.
+ if(/(?:access_token|refresh_token)=/.test(location.hash))history.replaceState(null,'',location.pathname+location.search);
  const configured=/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(config.url||'')&&/^(sb_publishable_|eyJ)/.test(config.publishableKey||'');
  try{session=JSON.parse(sessionStorage.getItem(key));}catch{}
  function remember(value){session=value;try{value?sessionStorage.setItem(key,JSON.stringify(value)):sessionStorage.removeItem(key);}catch{}}
