@@ -39,3 +39,5 @@ Object.assign(window.MS_TRANSLATIONS,{
 });
 
 Object.assign(window.MS_TRANSLATIONS,{'Saved packages & account drafts':'Save kite packages te account drafts','Read all FAQs & terms →':'Saare sawaal te shartaan parho →','Choose your arrangements in the package builder':'Package builder vich apne bandobast chuno','base · additions extra':'mool keemat · vaadhu bandobast vakhre'});
+
+Object.assign(window.MS_TRANSLATIONS,{'Arrange your request at a Gurdwara Sahib in Punjab, wherever you live. Choose your place and arrangements — we explain the options and cost before you decide.':'Videsh reh ke Punjab de Gurdwara Sahib vich apni request da bandobast karo. Jagah te bandobast chuno — faisle ton pehlan asi vikalp te kharcha samjhavange.'});
