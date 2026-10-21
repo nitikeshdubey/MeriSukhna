@@ -23,34 +23,9 @@
     welcomeDialog.addEventListener('cancel',rememberWelcome);
     document.getElementById('popupRequest').addEventListener('click',()=>{welcomeDialog.close();});
     let welcomeSeen=false;try{welcomeSeen=!!sessionStorage.getItem('meriSukhnaWelcomeSeen');}catch{welcomeSeen=true;}
-    if(!welcomeSeen)welcomeTimer=setTimeout(()=>{if(!document.hidden&&!document.querySelector('input:focus,textarea:focus,select:focus')&&location.hash!=='#request')openWelcome();},12000);
+    if(!welcomeSeen)welcomeTimer=setTimeout(()=>{if(!document.hidden&&!document.querySelector('input:focus,textarea:focus,select:focus')&&location.hash!=='#request')openWelcome();},25000);
     document.querySelectorAll('[data-request]').forEach(el=>el.addEventListener('click',rememberWelcome));
 
-    // Header scroll state
-    const header = document.getElementById('siteHeader');
-    const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 18);
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
-
-    // Mobile menu
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-      menuBtn.setAttribute('aria-expanded', 'false');
-    }));
-
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        mobileMenu.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); menuBtn.focus();
-      }
-    });
-
-  
 // Homepage photographs: random order, five-second cadence, progressive loading.
 (() => {
  const slides=[{"src":"https://commons.wikimedia.org/wiki/Special:FilePath/Sarovar%20and%20the%20Golden%20Temple.jpg?width=1000","alt":"Sri Harmandir Sahib (Golden Temple), Amritsar","name":"Sri Harmandir Sahib (Golden Temple)","place":"Amritsar"},{"src":"https://upload.wikimedia.org/wikipedia/commons/1/17/The_Sarovar_besides_the_GurudwaraTarn_Taran_Sahib%2C_Punjab%2C_India.jpg","alt":"Gurdwara Sri Tarn Taran Sahib","name":"Gurdwara Sri Tarn Taran Sahib","place":"Tarn Taran"},{"src":"https://upload.wikimedia.org/wikipedia/commons/a/a1/Ber_Sahib.jpg","alt":"Gurdwara Ber Sahib, Sultanpur Lodhi","name":"Gurdwara Sri Ber Sahib","place":"Sultanpur Lodhi"},{"src":"https://upload.wikimedia.org/wikipedia/commons/5/53/Takhat_Sri_Kesgarh_Sahib%2C_Anandpur_Sahib_03.jpg","alt":"Takht Sri Kesgarh Sahib, Anandpur Sahib","name":"Takht Sri Kesgarh Sahib","place":"Sri Anandpur Sahib"}];

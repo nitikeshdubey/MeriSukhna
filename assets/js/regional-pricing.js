@@ -44,7 +44,7 @@
           rate = Number(fx.rate); rateDate = fx.date || '';
           if (!Number.isFinite(rate) || rate <= 0) throw new Error('Invalid rate');
         }
-        regional = { currency, rate };
+        regional = { currency, rate }; window.msRegional = Object.freeze({country:geo.country_code,currency,rate,rateDate});
       } catch { regional = null; }
       render();
       document.dispatchEvent(new Event('regional-prices-ready'));
