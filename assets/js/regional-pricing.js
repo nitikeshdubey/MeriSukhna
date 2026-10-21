@@ -1,7 +1,7 @@
 /* Browser convenience gate. Enforce country restrictions at the hosting edge too. */
 (() => {
   const prices = { Basic: 150, Plus: 230, Complete: 300 };
-  const restricted = new Set(['IN', 'PK', 'BD']);
+  const restricted = new Set(['IN', 'PK', 'AF', 'BD']);
   const root = document.documentElement;
   let regional = null;
   window.packagePriceText = pack => regional ? format(prices[pack] * regional.rate, regional.currency) : 'Price unavailable until region is verified';
@@ -28,17 +28,30 @@
       el.textContent = window.packagePriceText(pack);
     });
   }
+  async function country() {
+    try { const saved=JSON.parse(sessionStorage.getItem('ms-region-v2')); if(saved && Date.now()-saved.time<600000 && /^[A-Z]{2}$/.test(saved.geo.country_code)) return saved.geo; } catch {}
+    let geo;
+    try { geo=await json('https://ipapi.co/json/'); if(geo.error || !/^[A-Z]{2}$/.test(geo.country_code||'')) throw Error('Invalid country'); }
+    catch { const fallback=await json('https://ipwho.is/'); if(fallback.success!==true || !/^[A-Z]{2}$/.test(fallback.country_code||'')) throw Error('Unknown country'); geo={country_code:fallback.country_code,country_name:fallback.country,currency:fallback.currency?.code||''}; }
+    try { sessionStorage.setItem('ms-region-v2',JSON.stringify({time:Date.now(),geo})); } catch {}
+    return geo;
+  }
   async function start() {
+    if(location.protocol==='file:') {
+      root.classList.add('region-allowed'); regional={currency:'CAD',rate:1}; render();
+      const note=document.createElement('div');note.textContent='LOCAL OWNER PREVIEW · Sample CAD prices · Public country restrictions remain active';note.style.cssText='position:relative;z-index:10000;padding:10px;text-align:center;background:#edd5a3;color:#12352d;font-size:12px';document.body.prepend(note);document.addEventListener('change',render);return;
+    }
     try {
-      const geo = await json('https://ipapi.co/json/');
+      const geo = await country();
       if (!/^[A-Z]{2}$/.test(geo.country_code || '') || geo.error) throw new Error('Unknown region');
-      if (restricted.has(geo.country_code)) { showGate('Service unavailable in your region', 'MERI SUKHNA is for families living outside India, Pakistan and Bangladesh.'); return; }
+      if (restricted.has(geo.country_code)) { showGate('Service unavailable in your region', 'MERI SUKHNA is for families living outside India, Pakistan, Afghanistan and Bangladesh.'); return; }
       const currency = String(geo.currency || '').toUpperCase();
-      if (!/^[A-Z]{3}$/.test(currency) || ['INR', 'PKR', 'BDT'].includes(currency)) throw new Error('Unsupported currency');
+
       root.classList.add('region-allowed');
       // Country access can be verified independently of currency-service availability.
       let rate = 1, rateDate = '';
       try {
+        if (!/^[A-Z]{3}$/.test(currency)) throw Error('Currency unavailable');
         if (currency !== 'CAD') {
           const fx = await json('https://api.frankfurter.dev/v2/rate/CAD/' + currency);
           rate = Number(fx.rate); rateDate = fx.date || '';
