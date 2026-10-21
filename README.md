@@ -4,6 +4,7 @@
 - customize.html: package customiser
 - blog/: blog index and articles
 - assets/css/: page styles (Poppins only)
+- assets/css/lovable-design.css: shared Lovable-style visual system, hero photo stack, timeline and card layouts
 - gurdwaras.html / faq.html / reviews.html: searchable location guide, service answers and moderated customer stories
 - account.html / admin.html: customer accounts and restricted staff workspace
 - assets/js/: homepage interactions, customiser, regional pricing, Roman Punjabi translations, drafts and Supabase integration
