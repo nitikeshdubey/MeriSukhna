@@ -8,5 +8,5 @@
  volume.addEventListener('input',()=>audio.volume=Number(volume.value)/100);
  audio.addEventListener('play',paint);audio.addEventListener('pause',paint);audio.addEventListener('error',()=>{toggle.textContent='Kirtan unavailable · Retry';toggle.setAttribute('aria-pressed','false');audio.removeAttribute('src');});
  document.addEventListener('visibilitychange',()=>{if(document.hidden){audio.pause();paint();}});
- let attempted=false;function check(){if(!attempted&&document.documentElement.classList.contains('region-allowed')){attempted=true;observer.disconnect();play();}}const observer=new MutationObserver(check);observer.observe(document.documentElement,{attributes:true,attributeFilter:['class']});check();paint();
+ paint();
 })();
