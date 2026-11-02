@@ -20,7 +20,7 @@ Hostinger hPanel must show SPF and DKIM correctly connected for this domain.
 Custom SMTP for Auth does not send request receipts. Deploy the receipt function and SQL migration separately before enabling the browser call.
 A receipt acknowledges receipt only; it must not imply a confirmed booking or payment.
 Never send to an address supplied in the request body; use the authenticated, verified account.
-Delivery activation and end-to-end mailbox verification remain pending until SMTP credentials are entered.
+Installed on 2026-11-02: Hostinger Auth SMTP, branded verification/recovery templates, receipt migration and function, SMTP_PASSWORD secret and browser integration. The owner confirmed recovery email delivery. An authenticated saved-request receipt still needs an inbox check.
 
 ## Receipt function deployment
 Apply ../007_request_receipts.sql in the trusted SQL editor.
@@ -32,3 +32,14 @@ The recipient comes only from the verified Auth account; ownership is checked se
 The service-only ledger prevents concurrent duplicates and limits failed delivery retries to three with five-minute spacing.
 A crash after SMTP acceptance may leave status "sending"; staff must inspect before retrying because SMTP cannot guarantee exactly-once delivery.
 Do not activate browser invocation until the migration, function and secret are deployed and tested.
+## Activation record — 2026-11-02
+- Hostinger Auth SMTP saved by owner; mailbox password remains in Supabase.
+- Branded signup/recovery templates installed.
+- Owner confirmed the recovery message arrived from contact@merisukhna.com.
+- Migration 007 installed with RLS enabled; rollback-only 008 assertions passed.
+- Receipt function deployed; SMTP_PASSWORD saved by owner.
+- Owner approved internal Auth verification instead of the legacy gateway JWT check.
+- Live tests: unauthenticated call = 401; untrusted Origin = 403.
+- Mock tests: verified account, request ownership, recipient injection, duplicate claim and SMTP failure passed.
+- Browser request saves invoke the function; email failure never undoes a saved request.
+- Remaining verification: save a real request while signed in and confirm its receipt arrives.
