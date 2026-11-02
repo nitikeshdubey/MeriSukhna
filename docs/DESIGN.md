@@ -15,3 +15,5 @@ https://bvconuycpdvgzbvbkijl.supabase.co/storage/v1/object/public/sizes/b4a0af-z
 Motion: existing five-second photo shuffling, subtle card/photo hover and scroll reveals. Reduced-motion settings disable animations.
 
 No account, database or country-rule changes. IN/PK/AF/BD restrictions and verified staff preview remain.
+
+Transparency correction: all five graphic WebP assets are now converted from the official transparent PNG originals from the 3dicons v1 source repository, rather than opaque website previews. Actual corner alpha is zero on every asset. See assets/images/graphic-credits.json for exact CC0 original URLs.
