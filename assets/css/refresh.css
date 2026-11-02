@@ -1,0 +1,108 @@
+/* Earlier Meri Sukhna design, refined in the requested navy palette. */
+:root{--navy:#0c2743;--green:#0c2743;--green-2:#21496e;--cream:#faf6ed;--muted:#586d80;--line:#0c274326;--sage:#e7edf2;--brand-gradient:radial-gradient(120% 90% at 85% 0%,#416b8b66,transparent 55%),linear-gradient(135deg,#21496e,#0c2743 65%,#0a223a)}
+[hidden]{display:none!important}body{font-size:clamp(14px,1.05vw,16px);color:var(--navy)}
+h1,h2,h3,legend{font-weight:600!important;line-height:1.2;text-wrap:balance}
+.design-home .hero h1{font-size:clamp(38px,4.7vw,66px);line-height:1.12}
+.design-home .hero-copy .hero-subtitle{font-size:clamp(18px,1.8vw,24px);line-height:1.5}
+.design-home .hero-copy>p:not(.hero-subtitle){font-size:clamp(14px,1.2vw,17px);line-height:1.8}
+.section-head h2,.design-home .section-head h2{font-size:clamp(28px,2.9vw,38px)}
+.ms-main h1,.wrap>.hero h1{font-size:clamp(34px,4.5vw,58px);line-height:1.16}
+.ms-main h2{font-size:clamp(21px,2vw,27px)}
+.ms-header{position:sticky!important;top:12px;width:calc(100% - 48px);max-width:1280px;margin:12px auto;border:1px solid #d6ad633d;border-radius:24px;background:#faf6edf5;backdrop-filter:blur(16px);box-shadow:0 8px 35px #0c27430b;z-index:130}
+.ms-header .ms-nav{min-height:74px;padding:10px 24px;gap:22px;flex-wrap:nowrap}
+.ms-header .ms-logo img{width:154px;height:auto;background:transparent;mix-blend-mode:multiply;padding:0}
+.ms-header .ms-links{gap:22px;font-size:12px}.ms-header .ms-actions{gap:14px;font-size:11px}
+.ms-header .ms-resources>summary{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:500;line-height:1.5;padding:10px 0;cursor:pointer}
+.ms-header .ms-resources>summary:after,.ms-header .ms-resources>summary::marker{content:none}
+.ms-header .nav-chevron,.ms-header .nav-arrow{display:block;flex-shrink:0;margin:0;vertical-align:middle;transition:transform .22s}
+.ms-header .ms-resources[open] .nav-chevron{transform:rotate(180deg)}
+.ms-header .ms-resources ul{border:1px solid #d6ad6340;border-radius:18px;background:#fffdf7;box-shadow:0 16px 45px #0c274312;padding:10px}
+.ms-header .ms-resources ul a{border-radius:10px;padding:10px 14px}
+.ms-header .ms-resources ul a:hover{background:#e7edf2;color:var(--navy)}
+.ms-header .ms-cta{background:var(--brand-gradient);color:#faf6ed;border:0;border-radius:40px;display:inline-flex;align-items:center;gap:12px;min-height:44px;padding:12px 18px}
+.ms-header .ms-cta:hover .nav-arrow{transform:translateX(3px)}
+.ms-header .ms-language{border:1px solid #0c274326;color:var(--navy);background:transparent;border-radius:24px;font-size:10px;padding:8px 11px}
+.ms-menu-button{border-radius:12px;background:transparent;color:var(--navy);border:1px solid #0c274326}
+.ms-mobile{border-top:1px solid #0c27431a;border-radius:0 0 24px 24px;background:#faf6ed}
+.ms-mobile a{border-radius:12px}.ms-mobile .ms-cta{color:white;justify-content:center}
+.design-home .hero-grid{padding-top:62px;gap:72px}.design-home .hero-visual{max-width:410px;aspect-ratio:4/4.8}
+.design-home .hero-carousel{aspect-ratio:4/4.8;border-radius:32px}
+.design-home .hero-carousel>img{border-radius:27px}
+.design-home .hero-photo-back{border-radius:32px}
+.design-home .hero-photo-back.back-one{opacity:.9;transform:translate(18px,10px) rotate(3deg)}
+.design-home .hero-photo-back.back-two{opacity:.65;transform:translate(-14px,18px) rotate(-3deg)}
+.design-home .hero-carousel .visual-caption{border-radius:0 0 27px 27px;background:linear-gradient(transparent,#071b2ed9);padding:90px 24px 24px}
+.design-home .hero-carousel .visual-caption>span{font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.design-home .hero-carousel .visual-caption>strong{font-size:clamp(18px,1.8vw,23px);max-width:78%}
+.hero-carousel-controls{display:flex;align-items:center;gap:8px}
+.hero-pause,.hero-next{display:grid;place-items:center;border:1px solid #ffffff70;border-radius:50%;background:#0c274335;color:white;width:32px;height:32px;min-height:32px;font-size:13px}
+.hero-pause:hover,.hero-next:hover{background:#ffffff30}
+.design-home .hero-actions .btn{border-radius:40px;min-height:52px;font-size:clamp(12px,1.05vw,15px)}
+.design-home .hero-actions .btn-dark{background:var(--brand-gradient)}
+.design-home .intro-card,.design-home .offer-card,.design-home .package-card,.home-blog-card,.ms-panel,.panel,.summary{border-radius:24px}
+.design-home .step-card{position:relative}
+.flow-graphic{position:absolute;width:56px;height:56px;object-fit:contain;right:4px;top:18px;transition:transform .4s}
+.step-card:hover .flow-graphic{transform:translateY(-5px) rotate(4deg)}
+.design-home .step-card h3{padding-right:18px;line-height:1.4}
+.design-home .step-num{margin-bottom:28px}
+.design-home .offer-card{transition:transform .3s,box-shadow .3s,border-color .3s}
+.design-home .offer-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px #0c27430c;border-color:#d6ad6370}
+.design-home .offer-icon{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:16px}
+.offer-icon svg{width:26px;height:26px;stroke:var(--navy);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.offer-icon span{font-size:10px;color:#9a743b}
+.design-home .g-card{border-radius:22px;overflow:hidden;border:1px solid #0c274312;background:#fffdf8}
+.design-home .g-card img{height:190px;aspect-ratio:4/3;object-fit:cover;transition:transform .8s ease}
+.design-home .g-card:hover img{transform:scale(1.055)}
+.design-home .g-info{padding:18px 16px}.design-home .g-name{font-size:13px;line-height:1.5}
+.ms-guide{overflow:hidden;border-radius:22px}.ms-guide>img{height:220px;border-radius:16px;transition:transform .7s ease}
+.ms-guide:hover>img{transform:scale(1.025)}
+.ms-guide h2{font-size:clamp(19px,1.8vw,23px)}
+.btn,.ms-button{border-radius:30px;gap:10px;transition:transform .25s,box-shadow .25s,background .25s}
+.btn:hover,.ms-button:hover{transform:translateY(-3px);box-shadow:0 10px 25px #0c274315}
+.btn-dark,.ms-button:not(.secondary):not(.gold):not(.danger){background:var(--brand-gradient)}
+.btn-light,.ms-button.secondary{color:var(--navy);border-color:#0c274333}
+.cta-arrow{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:50%;background:#ffffff18;flex-shrink:0}
+.cta-arrow svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6}
+.next-step-inner{border-radius:30px!important;border:1px solid #d6ad6355;background:linear-gradient(125deg,#e7edf2,#faf6ed);padding:44px!important;box-shadow:0 16px 45px #0c274307}
+.next-step h2{font-size:clamp(28px,3.2vw,43px);line-height:1.25}
+.next-step-actions .btn{min-height:54px;border-radius:35px;justify-content:center}
+.next-step-actions>.btn-dark{box-shadow:0 10px 24px #0c27431a}
+.cta-support{display:flex;align-items:center;gap:9px;font-size:11px;color:var(--muted)}
+.cta-support svg{width:16px;height:16px;stroke:var(--navy);fill:none;stroke-width:1.5}
+.ms-footer{background:var(--brand-gradient);border:1px solid #ffffff30;border-radius:36px 36px 0 0;padding:54px 40px 32px!important;text-align:left;margin-top:0}
+.ms-footer-inner{max-width:1152px;margin:auto}
+.footer-invitation{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;border-bottom:1px solid #ffffff26;padding:0 0 40px;margin-bottom:38px;position:relative}
+.footer-invitation .eyebrow{color:#edd5a3;font-size:10px;letter-spacing:.14em}
+.footer-invitation h2{font-size:clamp(28px,3.4vw,44px);color:#faf6ed;line-height:1.18;letter-spacing:-.035em;margin:18px 0}
+.ms-footer .footer-invitation p{font-size:12px;max-width:50ch;color:#d4dfeb}
+.footer-invitation-actions{display:grid;gap:16px;text-align:center}
+.ms-footer .footer-invitation-actions .ms-button{display:inline-flex;align-items:center;gap:14px;font-size:13px;min-height:52px;padding:14px 25px;background:linear-gradient(120deg,#edd5a3,#d6ad63);color:var(--navy);border-radius:32px;text-decoration:none}
+.ms-footer .footer-invitation-actions>a:last-child{font-size:11px;color:#e0e7ef;text-underline-offset:5px}
+.ms-footer-grid{grid-template-columns:1.4fr 1fr 1.1fr;gap:50px}
+.ms-footer .ms-footer-logo{width:156px!important;max-width:100%;height:auto!important;aspect-ratio:3320/1031;object-fit:contain;padding:10px!important;border-radius:13px!important;background:#faf6ed!important;box-sizing:content-box}
+.ms-footer p{font-size:12px;line-height:1.9;color:#d4dfeb;max-width:40ch}
+.ms-footer strong{color:#edd5a3;font-size:13px;font-weight:600;display:block;margin-bottom:10px}
+.ms-footer a{font-size:12px;color:#dce5ee;padding:6px 0;text-decoration:none}
+.ms-footer a:hover{color:#edd5a3;text-decoration:underline}
+.ms-footer small{color:#c3d2e2;line-height:1.8}
+.ms-footer .kirtan-credit{font-size:9px;line-height:1.8;color:#b9ccdf}
+.ms-footer .photo-credit-link{max-width:1152px;margin:16px auto 0}
+.ms-footer .photo-credit-link a{font-size:10px;color:#c3d2e2}
+.music-player{position:static!important;margin:12px auto!important;max-width:calc(100% - 32px);width:max-content;border-radius:24px;background:#faf6ed;border:1px solid #d6ad6355;color:var(--navy)}
+.music-player button{background:none;color:var(--navy)}
+.wa-float{background:var(--navy);box-shadow:0 8px 24px #0c274326}
+.owner-preview-banner{background:#edd5a3;color:var(--navy)}
+@media(max-width:1100px){.ms-header{width:calc(100% - 32px);top:10px;margin-block:10px}.ms-header .ms-nav{padding:10px 20px;min-height:70px}.ms-header .ms-links,.ms-header .ms-desktop-account,.ms-header .ms-actions>.ms-cta{display:none}.ms-menu-button{display:block}.design-home .hero-grid{gap:46px}.footer-invitation{gap:30px}.ms-footer-grid{gap:30px}}
+@media(max-width:760px){.ms-header{width:calc(100% - 24px);margin-block:8px;top:8px;border-radius:21px}.ms-header .ms-nav{padding:9px 14px;min-height:64px;gap:12px}.ms-header .ms-logo img{width:138px}.ms-header .ms-actions{gap:10px}.ms-mobile{border-radius:0 0 21px 21px}
+.design-home .hero-grid{padding:38px 0 44px;gap:44px}.design-home .hero-visual{max-width:330px;aspect-ratio:4/4.8;margin-bottom:42px}.design-home .hero-carousel{aspect-ratio:4/4.8}.design-home .hero h1{font-size:clamp(37px,8.8vw,52px)}.design-home .hero-copy .hero-subtitle{font-size:18px}.design-home .hero-actions{gap:12px}.design-home .hero-actions .btn{font-size:13px;min-height:50px}
+.design-home .hero-carousel .visual-caption>strong{font-size:18px}.hero-pause,.hero-next{height:30px;width:30px;min-height:30px}
+.flow-graphic{width:44px;height:44px;right:0;top:16px}.design-home .step-card h3{font-size:14px;padding-right:0}.design-home .step-num{margin-bottom:26px}
+.design-home .g-card img{height:135px}.design-home .g-info{padding:12px}.design-home .g-name{font-size:11px}.ms-guide>img{height:210px}
+.next-step-inner{padding:28px!important;border-radius:24px!important;gap:26px}.next-step h2{font-size:30px}.next-step-actions .btn{font-size:12px;min-height:52px}
+.ms-footer{padding:36px 24px 26px!important;border-radius:28px 28px 0 0}.footer-invitation{grid-template-columns:1fr;gap:22px;padding-bottom:30px;margin-bottom:30px}.footer-invitation h2{font-size:34px}.ms-footer .footer-invitation p{font-size:12px}.footer-invitation-actions{justify-self:stretch;max-width:360px}
+.ms-footer-grid{grid-template-columns:1fr 1fr;gap:28px 20px}.ms-footer-grid>div:first-child{grid-column:1/-1}.ms-footer p{font-size:11px;max-width:48ch}.ms-footer a{font-size:11px}.ms-footer strong{font-size:12px}.ms-footer .ms-footer-logo{width:142px!important}}
+@media(max-width:400px){.design-home .hero-visual{max-width:280px}.design-home .hero h1{font-size:37px}.design-home .hero-copy .hero-subtitle{font-size:17px}.flow-graphic{width:39px;height:39px}.footer-invitation h2{font-size:30px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.ms-reveal{opacity:1!important;transform:none!important}}
+.footer-invitation-copy{position:relative;padding-right:120px}.footer-graphic{position:absolute;right:10px;top:18px;width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 12px 18px #071b2e33);transition:transform .4s}.footer-invitation:hover .footer-graphic{transform:translateY(-5px) rotate(-4deg)}
+@media(max-width:760px){.footer-invitation-copy{padding-right:100px}.footer-graphic{right:0;width:82px;height:82px}}
+@media(max-width:540px){.footer-invitation-copy{padding-right:0}.footer-graphic{display:none}}
