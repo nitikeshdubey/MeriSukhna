@@ -1,6 +1,6 @@
 
 const form=document.getElementById('customForm');
-const base='https://wa.me/919888188114?text=';
+const base='https://wa.me/917717534949?text=';
 const allowed=['Basic','Plus','Complete'];
 const initial=new URLSearchParams(location.search).get('package');
 if(allowed.includes(initial))form.querySelector('input[value="'+initial+'"]').checked=true;
