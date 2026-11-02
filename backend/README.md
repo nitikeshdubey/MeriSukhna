@@ -6,7 +6,9 @@ The website remains a static GitHub Pages site. Supabase provides authentication
 
 1. `001_platform.sql`: requests, timelines, versioned quotations, family access, private media, consented reviews, drafts, staff roles and audit records.
 2. `003_gallery_visibility.sql`: reversible hiding/restoration of gallery items, including access checks for signed URLs.
-3. `004_pricing_snapshot.sql`: retains the customer's initial currency/rate snapshot with a request. These are enquiry estimates; staff confirm the actual written quotation.
+3. `004_pricing_snapshot.sql`: historical snapshot migration, superseded by 005.
+4. `005_security_hardening.sql`: strips untrusted customer rates, validates request shape and serializes request/invitation limits. Apply after 004.
+5. `006_security_regression.sql`: rollback-only access and input regression checks. This is a test, not a migration.
 
 `002_security_tests.sql` runs a transaction with disposable test identities and rolls everything back. It tests ownership, customer/staff separation, role escalation denial, scoped family access and revocation, server-calculated quotation totals, acceptance, private-media authorisation and consented review moderation. Run only in an empty staging database or adjust count assertions for existing production data. It has passed against the initially empty project.
 
@@ -20,12 +22,13 @@ The website remains a static GitHub Pages site. Supabase provides authentication
 
 ## Operational limits
 
-- Family invitations and updates are recorded in accounts. Customers explicitly copy/send the invitation text; automated email/SMS/WhatsApp delivery is not configured. No message is sent automatically.
+- Hostinger SMTP sends account verification and recovery emails from contact@merisukhna.com. Recovery delivery was confirmed by the owner on 2026-11-02. Saved-request receipts use the authenticated request-receipt Edge Function and service-only ledger (007). Each request save attempts a receipt; failed delivery does not undo the saved request. Full receipt mailbox delivery still needs an authenticated real request test.
+- Family invitations and progress updates remain in accounts. Customers explicitly copy/send invitation text; automatic WhatsApp/SMS and progress-update emails are not configured.
 - Private media use a non-public bucket and signed URLs lasting 60 seconds. Revocation prevents new URLs; an already issued URL may work for up to its remaining 60 seconds.
 - Staff upload JPEG/PNG/WebP/MP4/WebM up to 50 MB and must have permission for the recording. Hidden media can be restored; hiding is not permanent deletion.
 - Customers can accept only issued quotations for requests they own. Unknown shop prices remain pending; a quote cannot be issued until all prices and written payment/cancellation/refund terms are supplied. No payment processing is implemented or implied.
 - Reviews require a completed owned request, publication consent and staff moderation. Withdrawing consent removes public visibility.
-- The inherited country gate is browser-side. It blocks IN/PK/BD and fails closed for unknown country; it is not a hosting-edge firewall. Database ownership and staff permissions are enforced separately by RLS and checked RPCs.
+- The inherited country gate is browser-side. It blocks IN/PK/AF/BD and fails closed for unknown country; it is not a hosting-edge firewall. Database ownership and staff permissions are enforced separately by RLS and checked RPCs.
 - Sessions are kept in the current tab's session storage, not long-lived local storage. Device package drafts expire after 30 days and exclude notes. Signed-in account drafts are private.
 - Country FX lookup failure does not reveal an alternate currency or substitute CAD prices.
 
