@@ -1,5 +1,10 @@
 // Roman Punjabi keeps the site's original voice and the Poppins-only brand.
 window.MS_TRANSLATIONS={
+'Build package':'Package banao',
+'Your family. Your connection.':'Tuhada parivaar. Tuhada judaav.',
+'Let’s plan the arrangements together, in Punjabi or English.':'Punjabi jaan English vich, aao ral ke bandobast di yojna banaiye.',
+'Talk to us on WhatsApp ↗':'WhatsApp te sade naal gall karo ↗',
+'Choose & customise a package':'Apna package chuno te apne mutabik banao',
 'Personal coordination, wherever you call home.':'Tusi jithe vi rehnde ho, tuhadi request layi nijji madad.',
 'Living abroad brings different journeys. Your connection with Punjab is personal — and so is your Sukhna.':'Videsh di har zindagi di apni kahaani hai. Punjab naal tuhadda judaav nijji hai — tuhadi Sukhna vi.',
 'Wherever life takes you.':'Zindagi jithe vi lai jaave.',
