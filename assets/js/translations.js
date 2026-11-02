@@ -1,5 +1,10 @@
 // Roman Punjabi keeps the site's original voice and the Poppins-only brand.
 window.MS_TRANSLATIONS={
+'Personal coordination, wherever you call home.':'Tusi jithe vi rehnde ho, tuhadi request layi nijji madad.',
+'Living abroad brings different journeys. Your connection with Punjab is personal — and so is your Sukhna.':'Videsh di har zindagi di apni kahaani hai. Punjab naal tuhadda judaav nijji hai — tuhadi Sukhna vi.',
+'Wherever life takes you.':'Zindagi jithe vi lai jaave.',
+'Plan your Sukhna ↗':'Apni Sukhna di yojna banao ↗',
+'Family stories coming soon · Shared with permission':'Parivaaran diyaan kahaaniyaan jaldi · Ijazat naal sanjhiyan',
  'Checking service availability…':'Seva di uplabdhata vekh rahe haan…',
  'We are checking your country to show the appropriate currency. This uses an IP-based country lookup from ipapi.co.':'Sahi currency dikhaun layi tuhade desh di jaanch ho rahi hai. Eh ipapi.co di IP-aadharit desh jaankari vartda hai.',
  'JavaScript is required to verify your region and display prices.':'Desh di jaanch te keemtaan dikhaun layi JavaScript zaroori hai.',

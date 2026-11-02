@@ -53,7 +53,7 @@
   async function start() {
     if(location.protocol==='file:') {
       root.classList.add('region-allowed'); regional={currency:'CAD',rate:1}; render();
-      const note=document.createElement('div');note.textContent='LOCAL OWNER PREVIEW · Sample CAD prices · Public country restrictions remain active';note.style.cssText='position:relative;z-index:10000;padding:10px;text-align:center;background:#edd5a3;color:#12352d;font-size:12px';document.body.prepend(note);document.addEventListener('change',render);return;
+      const note=document.createElement('div');note.textContent='LOCAL OWNER PREVIEW · Sample CAD prices · Public country restrictions remain active';note.style.cssText='position:relative;z-index:10000;padding:10px;text-align:center;background:#edd5a3;color:#0c2743;font-size:12px';document.body.prepend(note);document.addEventListener('change',render);return;
     }
     try {
       if(await ownerAccess())return;
