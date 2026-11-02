@@ -1,5 +1,5 @@
 
-    const REQUEST_URL = 'https://wa.me/917717534949';
+    const REQUEST_URL = 'https://wa.me/917717534949?text='+encodeURIComponent('Sat Sri Akal Ji! I would like to arrange a Meri Sukhna request. Please help me choose a package and Gurdwara Sahib, and share availability, an itemised quote and payment/cancellation terms. I prefer to speak in Punjabi or English.');
     const INSTAGRAM_URL = 'https://instagram.com/merisukhna';
   
 
