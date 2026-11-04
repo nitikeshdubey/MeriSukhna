@@ -18,7 +18,7 @@
  renderReviews();if(!status)return;
  const admin=!!document.getElementById('adminContent'),auth=document.getElementById('authPanel'),content=document.getElementById(admin?'adminContent':'accountContent');
  async function busy(fn){try{await fn();}catch(error){say(error.message);}}
- function authScreen(){content.hidden=true;auth.replaceChildren();if(!api.configured){auth.append(box(h('h2','Secure accounts are not connected yet.'),note('Your package builder remains available. Account features will activate after the secure backend is connected.'),h('a','Build your package',{href:'customize.html',class:'ms-button'})));return;}
+ function authScreen(){content.hidden=true;auth.replaceChildren();if(!api.configured){auth.append(box(h('h2','Secure accounts are not connected yet.'),note('Your package builder remains available. Account features will activate after the secure backend is connected.'),h('a','Build your package',{href:'/customize',class:'ms-button'})));return;}
   const form=h('form'),email=field('Email','email','',{required:true,autocomplete:'email',maxlength:254}),password=field('Password','password','',{required:true,autocomplete:'current-password',minlength:12,maxlength:128});form.append(h('h2',admin?'Staff sign-in':'Sign in'),email.wrap,password.wrap,note('Use at least 12 characters. Confirm your email before signing in.'));
   const submit=h('button','Sign in',{type:'submit',class:'ms-button'});form.append(submit);
   if(!admin)form.append(button('Create account',async()=>{if(!form.reportValidity())return;await api.signup(email.input.value.trim(),password.input.value);say('Check your email to confirm your account, then return here to sign in.');password.input.value='';},'secondary'));
@@ -27,27 +27,118 @@
  }
  function pendingRequest(){const pending=sessionStorage.getItem('ms-pending-request');if(!pending)return null;try{return JSON.parse(pending);}catch{return null;}}
  async function load(){say('');if(api.recovery){content.hidden=true;auth.replaceChildren();const form=h('form'),pw=field('New password','password','',{required:true,minlength:12,maxlength:128,autocomplete:'new-password'}),confirm=field('Confirm new password','password','',{required:true,minlength:12,autocomplete:'new-password'}),submit=h('button','Save new password',{type:'submit',class:'ms-button'});form.append(h('h2','Reset your password'),pw.wrap,confirm.wrap,submit);form.onsubmit=e=>{e.preventDefault();if(pw.input.value!==confirm.input.value){say('Passwords do not match.');return;}submit.disabled=true;busy(async()=>{await api.setPassword(pw.input.value);await load();say('Password updated. Sign in with your new password.');}).finally(()=>submit.disabled=false);};auth.append(box(form));return;}if(!api.user){authScreen();return;}auth.replaceChildren(toolbar(userText('span',api.user.email||'',{class:'ms-meta'}),button('Refresh',load,'secondary'),button('Sign out',async()=>{try{await api.logout();}finally{content.replaceChildren();authScreen();}},'secondary')));content.hidden=false;content.replaceChildren();
-  if(admin){const isStaff=await api.rpc('ms_is_staff',{});if(!isStaff){content.append(box(h('h2','No staff role is assigned to this account.'),h('a','Return to my requests',{href:'account.html',class:'ms-button'})));return;}await staffList();return;}
+  if(admin){const isStaff=await api.rpc('ms_is_staff',{});if(!isStaff){content.append(box(h('h2','No staff role is assigned to this account.'),h('a','Return to my requests',{href:'/account',class:'ms-button'})));return;}await staffList();return;}
   const pending=pendingRequest();if(pending){content.append(box(h('h2','A package is ready to save as a tracked request.'),userText('p',pending.package+' · '+pending.place),button('Create saved request',async()=>{const id=await api.rpc('create_request',{selection:pending});sessionStorage.removeItem('ms-pending-request');sessionStorage.setItem('ms-created-request',id);location.hash=id;await load();})));}
   const [requests,family]=await Promise.all([api.table('ms_requests','select=*&order=created_at.desc'),api.rpc('family_requests',{})]);
   const created=sessionStorage.getItem('ms-created-request');if(created&&requests.some(r=>r.id===created)){const receipt=box(h('span','Request received',{class:'ms-pill'}),h('h2','Your request is safely saved.'),userText('p','Reference: '+created),note('Next: our team will review availability and prepare a written quotation. Your booking is confirmed only after the arrangements and total are agreed.'),button('Copy reference',async()=>{await navigator.clipboard.writeText(created);say('Reference copied.');},'secondary'));const delivery=sessionStorage.getItem('ms-receipt-status');if(delivery)receipt.append(note(delivery));content.append(receipt);sessionStorage.removeItem('ms-created-request');sessionStorage.removeItem('ms-receipt-status');}
   const updates=box(h('h2','Your latest updates'),note('Updates appear here when our team changes your request or issues a quotation. WhatsApp updates are arranged directly with our team.'));const events=await api.table('ms_events','select=request_id,stage,note,created_at&order=created_at.desc&limit=10');const myIds=new Set(requests.map(r=>r.id));events.filter(e=>myIds.has(e.request_id)).slice(0,5).forEach(e=>updates.append(box(h('strong',e.stage),userText('p',e.note),note(date(e.created_at)),h('a','View request',{href:'#'+e.request_id,class:'ms-button secondary'}))));if(!events.some(e=>myIds.has(e.request_id)))updates.append(note('No updates yet. Your latest progress will appear here.'));content.append(updates);
-  const own=h('section');own.append(h('h2','Your requests'));if(!requests.length)own.append(box(note('No requests yet. Build a package to get started.'),h('a','Build your package',{href:'customize.html',class:'ms-button'})));for(const request of requests)own.append(requestCard(request,false));content.append(own);
+  const own=h('section');own.append(h('h2','Your requests'));if(!requests.length)own.append(box(note('No requests yet. Build a package to get started.'),h('a','Build your package',{href:'/customize',class:'ms-button'})));for(const request of requests)own.append(requestCard(request,false));content.append(own);
   if(family.length){const group=h('section');group.append(h('h2','Family requests'));family.forEach(r=>group.append(requestCard(r,false,true)));content.append(group);}
-  const drafts=await api.table('ms_drafts','select=updated_at');if(drafts.length)content.append(box(h('h2','Saved package'),note('Your private package draft is available in the package builder.'),toolbar(h('a','Restore account draft',{href:'customize.html',class:'ms-button secondary'}),button('Clear saved package',async()=>{await api.rpc('clear_draft',{});await load();},'secondary'))));
+  const drafts=await api.table('ms_drafts','select=updated_at');if(drafts.length)content.append(box(h('h2','Saved package'),note('Your private package draft is available in the package builder.'),toolbar(h('a','Restore account draft',{href:'/customize',class:'ms-button secondary'}),button('Clear saved package',async()=>{await api.rpc('clear_draft',{});await load();},'secondary'))));
  }
  function requestCard(r,staff=false,family=false){const details=h('details',null,{class:'ms-request'}),summary=h('summary');summary.append(userText('span',(r.selection?.package||'Family request')+' · '+r.id),h('span',' '+r.status,{class:'ms-pill'}));details.append(summary);const body=h('div');details.append(body);let loaded=false;details.addEventListener('toggle',()=>{if(!details.open||loaded)return;loaded=true;busy(async()=>{try{await requestDetails(body,r,staff,family);}catch(error){loaded=false;throw error;}});});if(location.hash.slice(1)===r.id)details.open=true;return details;}
  async function requestDetails(body,r,staff,family){body.replaceChildren();if(!family){body.append(userText('p',r.selection.place),userText('p',[r.selection.paath,...r.selection.additions,r.selection.date?'Preferred date: '+r.selection.date:'',r.selection.notes].filter(Boolean).join(' · ')),note('Created: '+date(r.created_at)));}
   if(r.scheduled_date)body.append(userText('p','Agreed date: '+r.scheduled_date));if(r.call_url&&/^https:\/\//.test(r.call_url))body.append(h('a','View live call link',{href:r.call_url,target:'_blank',rel:'noopener noreferrer',class:'ms-button secondary'}));
   const events=await api.table('ms_events','select=*&request_id=eq.'+r.id+'&order=created_at.asc');const timeline=h('ol',null,{class:'ms-timeline'});events.forEach(event=>{const li=h('li');li.append(h('strong',event.stage),userText('p',event.note),h('small',date(event.created_at)));timeline.append(li);});body.append(h('h3','Request timeline'),timeline);
-  if(!family){const quotes=await api.table('ms_quotes','select=*&request_id=eq.'+r.id+'&order=version.desc');body.append(h('h3','Quotations'));if(!quotes.length)body.append(note('No quotation issued yet.'));quotes.forEach(q=>body.append(quoteView(q,staff,async()=>{const fresh=(await api.table('ms_requests','select=*&id=eq.'+r.id))[0];await requestDetails(body,fresh,staff,false);})));}
+  let quotes=[];if(!family){quotes=await api.table('ms_quotes','select=*&request_id=eq.'+r.id+'&order=version.desc');body.append(h('h3','Quotations'));if(!quotes.length)body.append(note('No quotation issued yet.'));quotes.forEach((q,i)=>body.append(quoteView(q,staff,async()=>{const fresh=(await api.table('ms_requests','select=*&id=eq.'+r.id))[0];await requestDetails(body,fresh,staff,false);},quotes.slice(i+1).find(old=>old.state!=='draft'))));}
+  await operationsPanel(body,r,staff,family,quotes);
   if(staff){body.append(staffStage(r,body),quoteEditor(r,body),uploadPanel(r,body));}else if(!family){body.append(await familyPanel(r,body));if(r.status==='completed')body.append(reviewPanel(r));}
   body.append(await gallery(r,staff,async()=>requestDetails(body,r,staff,family)));if(staff){const rows=await api.table('ms_reviews','select=*&request_id=eq.'+r.id);body.append(h('h3','Review moderation'));if(!rows.length)body.append(note('No customer story submitted yet.'));for(const row of rows)body.append(box(userText('h3',row.display_name),userText('p',row.story),note(row.consent?'Publication consent given.':'Publication consent withdrawn.'),button(row.approved?'Unpublish':'Publish with consent',async()=>{await api.rpc('moderate_review',{review_id:row.id,publish:!row.approved});await requestDetails(body,r,true);},'secondary')));const audit=await api.rpc('staff_audit',{rid:r.id});body.append(h('h3','Audit history'));audit.forEach(a=>body.append(note(date(a.created_at)+' · '+a.action)));}
  }
- function quoteView(q,staff,refresh){const panel=box(h('h3','Quotation · v'+q.version),h('span',q.state,{class:'ms-pill'})),wrap=h('div',null,{class:'ms-table-wrap'}),table=h('table',null,{class:'ms-table'}),head=h('tr');['Description','Quantity','Unit price','Line total'].forEach(x=>head.append(h('th',x,{scope:'col'})));const thead=h('thead');thead.append(head);table.append(thead);const tbody=h('tbody');q.items.forEach(item=>{const row=h('tr');row.append(userText('td',item.description),h('td',item.quantity),h('td',money(item.unit_price,q.currency)),h('td',money(item.unit_price==null?null:item.quantity*item.unit_price,q.currency)));tbody.append(row);});table.append(tbody);wrap.append(table);panel.append(wrap,h('strong',t('Total')+': '+money(q.total,q.currency)),h('h4','Terms'),userText('p',q.terms,{style:'white-space:pre-wrap'}));if(q.accepted_at)panel.append(note('Accepted: '+date(q.accepted_at)));
+ function download(name,type,text){
+  const url=URL.createObjectURL(new Blob([text],{type}));
+  const link=h('a',null,{href:url,download:name});
+  document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+ }
+ function calendarText(r,ops){
+  const stamp=value=>new Date(value).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const escape=value=>String(value).replace(/\\/g,'\\\\').replace(/\r\n|\r|\n/g,'\\n').replace(/[,;]/g,char=>'\\'+char);
+  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Meri Sukhna//Family calls//EN','BEGIN:VEVENT','UID:'+r.id+'@merisukhna.com','DTSTAMP:'+stamp(new Date()),'DTSTART:'+stamp(ops.call_at),'SUMMARY:Confirmed Meri Sukhna family call','DESCRIPTION:'+escape('If the call cannot connect: '+ops.fallback+'\nSign in to your account for the current joining link.'),'END:VEVENT','END:VCALENDAR'];
+  const encoder=new TextEncoder();
+  return lines.map(line=>{let folded='',size=0;for(const char of line){const bytes=encoder.encode(char).length;if(size+bytes>74){folded+='\r\n ';size=1;}folded+=char;size+=bytes;}return folded;}).join('\r\n')+'\r\n';
+ }
+ function quoteDifference(current,previous){
+  if(!previous)return [];
+  const changes=[],remaining=[...previous.items];
+  for(const item of current.items){
+   const index=remaining.findIndex(old=>old.description===item.description);
+   if(index<0){changes.push('Added '+item.description+' · '+item.quantity+' × '+money(item.unit_price,current.currency));continue;}
+   const old=remaining.splice(index,1)[0];
+   if(Number(old.quantity)!==Number(item.quantity)||old.unit_price!==item.unit_price||current.currency!==previous.currency)
+    changes.push(item.description+' · '+old.quantity+' × '+money(old.unit_price,previous.currency)+' → '+item.quantity+' × '+money(item.unit_price,current.currency));
+  }
+  for(const old of remaining)changes.push('Removed '+old.description+' · '+old.quantity+' × '+money(old.unit_price,previous.currency));
+  if(current.terms!==previous.terms)changes.push('Written terms changed. Review the terms below before accepting.');
+  changes.push('Total · '+money(previous.total,previous.currency)+' → '+money(current.total,current.currency));
+  return changes;
+ }
+ function decisionSummary(r,quotes){
+  const approved=quotes.find(q=>q.state==='accepted');
+  const lines=['Meri Sukhna · Family decision summary','Request '+r.id,'Status: '+r.status,'Requested location: '+r.selection.place,'Package: '+r.selection.package];
+  if(r.selection.notes)lines.push('Family instructions: '+r.selection.notes);
+  lines.push('Schedule: '+(r.scheduled_date||'Awaiting confirmation'));
+  if(approved){
+   lines.push('Approved quotation v'+approved.version+' · '+date(approved.accepted_at));
+   approved.items.forEach(i=>lines.push(i.description+' · '+i.quantity+' × '+money(i.unit_price,approved.currency)));
+   lines.push('Approved total: '+money(approved.total,approved.currency),'Written terms: '+approved.terms);
+  }else lines.push('A current approved quotation is pending.');
+  lines.push('Coordinator: +91 77175 34949 · contact@merisukhna.com');
+  return lines.join('\n');
+ }
+ function printSummary(text){
+  const section=h('section',null,{id:'msPrintSummary'});section.append(h('h1','Family decision summary'),userText('p',text,{style:'white-space:pre-wrap'}));
+  document.getElementById('msPrintSummary')?.remove();document.body.append(section);
+  const css=h('style','@media screen{#msPrintSummary{display:none}}@media print{body>*:not(#msPrintSummary){display:none!important}#msPrintSummary{display:block!important;color:#111;font-size:11pt;line-height:1.5}#msPrintSummary p{overflow-wrap:anywhere}}');
+  document.head.append(css);window.addEventListener('afterprint',()=>{section.remove();css.remove();},{once:true});window.print();
+ }
+ async function operationsPanel(body,r,staff,family,quotes){
+  const redraw=async()=>requestDetails(body,(await api.table('ms_requests','select=*&id=eq.'+r.id))[0],staff,false);
+  const panel=box(h('h3','Family planning'));
+  body.append(panel);
+  if(!family){
+   panel.append(button('Print family decision summary',()=>printSummary(decisionSummary(r,quotes)),'secondary'));
+   const receipt='Meri Sukhna · Saved-request receipt\nReference: '+r.id+'\nReceived: '+date(r.created_at)+'\nPackage: '+r.selection.package+'\nLocation: '+r.selection.place+'\nThis confirms receipt of your request. Booking and payment are confirmed separately.\ncontact@merisukhna.com · +91 77175 34949';
+   panel.append(button('Download request receipt',()=>download('request-'+r.id+'.txt','text/plain;charset=utf-8',receipt),'secondary'));
+  }
+  if(family&&!r.call_url){panel.remove();return;}
+  let ops;
+  try{ops=await api.rpc('request_operations',{rid:r.id});}catch{panel.append(note('Scheduling and delivery details are unavailable. Refresh to try again.'));return;}
+  if(ops.call_at){
+   panel.append(userText('p','Confirmed live call · '+date(ops.call_at)+' (your local time)'),userText('p','If the connection fails: '+ops.fallback),button('Add confirmed call to calendar',()=>download('merisukhna-call.ics','text/calendar;charset=utf-8',calendarText(r,ops)),'secondary'));
+  }
+  if(family)return;
+  const states={sent:'Email accepted by mail server',sending:'Sending',failed:'Delivery failed',not_requested:'No delivery attempt recorded'};
+  panel.append(note('Request receipt · '+(states[ops.receipt_state]||'Status unavailable')+(ops.receipt_updated?' · '+date(ops.receipt_updated):'')));
+  const retryAllowed=(ops.receipt_state==='not_requested'||(ops.receipt_state==='failed'&&ops.receipt_attempts<3&&Date.now()-Date.parse(ops.receipt_updated)>=300000))&&Date.now()-Date.parse(r.created_at)<86400000;
+  if(!staff&&retryAllowed)panel.append(button('Send receipt to my verified email',async()=>{await api.retryReceipt(r.id);await redraw();},'secondary'));
+  panel.append(note(ops.change_until?'Changes can be requested until '+date(ops.change_until)+' (your local time).':'Contact the coordinator to agree a change deadline.'));
+  if(ops.family_change)panel.append(userText('p','Latest family change request: '+ops.family_change));
+  if(!staff&&r.status!=='completed'&&ops.change_until&&Date.now()<Date.parse(ops.change_until)){
+   const change=field('Requested change for coordinator review','textarea',ops.family_change||'',{required:true,maxlength:600});
+   panel.append(change.wrap,button('Send change for review',async()=>{if(!change.input.reportValidity())return;await api.rpc('request_amendment',{rid:r.id,expected_revision:ops.revision,details:change.input.value});await redraw();say('Change request saved for review.');}));
+  }
+  if(!staff)return;
+  const punjabValue=value=>value?new Date(Date.parse(value)+19800000).toISOString().slice(0,16):'';
+  const instant=value=>value?new Date(value+':00+05:30').toISOString():null;
+  const handover=ops.handover||{},deadline=field('Change cutoff in Punjab time','datetime-local',punjabValue(ops.change_until)),time=field('Confirmed call time in Punjab','datetime-local',punjabValue(ops.call_at)),fallback=field('Agreed fallback if the call fails','text',ops.fallback||'',{maxlength:300}),contact=field('Nominated family contact','text',handover.contact||'',{maxlength:160}),outstanding=field('Outstanding decisions','textarea',handover.outstanding||'',{maxlength:400});
+  const checklist=[['names','Names checked with family'],['purchases','Purchases and quantities checked'],['permissions','Local permissions checked']].map(([key,title])=>({key,item:check(title,handover[key]===true)}));
+  panel.append(h('h3','Coordinator handover'),deadline.wrap,contact.wrap,...checklist.map(x=>x.item.wrap),outstanding.wrap);
+  const scheduled=r.selection.package==='Complete'&&r.status==='scheduled'&&r.call_url;
+  if(scheduled)panel.append(time.wrap,fallback.wrap);
+  panel.append(button('Save handover and planning details',async()=>{
+   if(!deadline.input.reportValidity()||!time.input.reportValidity())return;
+   const data={contact:contact.input.value.trim(),outstanding:outstanding.input.value.trim()};
+   checklist.forEach(x=>data[x.key]=x.item.input.checked);
+   await api.rpc('save_request_operations',{rid:r.id,expected_revision:ops.revision,change_until:instant(deadline.input.value),call_at:scheduled?instant(time.input.value):null,fallback:scheduled?fallback.input.value.trim():'',handover:data});
+   await redraw();say('Planning details saved.');
+  }));
+ }
+
+ function quoteView(q,staff,refresh,previous){const panel=box(h('h3','Quotation · v'+q.version),h('span',q.state,{class:'ms-pill'})),wrap=h('div',null,{class:'ms-table-wrap'}),table=h('table',null,{class:'ms-table'}),head=h('tr');['Description','Quantity','Unit price','Line total'].forEach(x=>head.append(h('th',x,{scope:'col'})));const thead=h('thead');thead.append(head);table.append(thead);const tbody=h('tbody');q.items.forEach(item=>{const row=h('tr');row.append(userText('td',item.description),h('td',item.quantity),h('td',money(item.unit_price,q.currency)),h('td',money(item.unit_price==null?null:item.quantity*item.unit_price,q.currency)));tbody.append(row);});table.append(tbody);wrap.append(table);panel.append(wrap,h('strong',t('Total')+': '+money(q.total,q.currency)),h('h4','Terms'),userText('p',q.terms,{style:'white-space:pre-wrap'}));if(q.accepted_at)panel.append(note('Accepted: '+date(q.accepted_at)));
+  if(previous){panel.append(h('h4','Changes since quotation v'+previous.version));const changes=h('ul');quoteDifference(q,previous).forEach(change=>changes.append(userText('li',change)));panel.append(changes);}
   if(!staff&&q.state==='issued'){const consent=check('I have reviewed the items, total and written terms.');panel.append(note('Please read the written terms before accepting.'),consent.wrap,button('Accept this quotation',async()=>{if(!consent.input.checked)throw new Error('Please read the written terms before accepting.');await api.rpc('accept_quote',{qid:q.id});await refresh();}));}return panel;
  }
- async function familyPanel(r,body){const panel=box(h('h3','Family access')),rows=await api.table('ms_family','select=*&request_id=eq.'+r.id+'&order=created_at.desc');panel.append(note('No messages are sent automatically.'));if(!rows.length)panel.append(note('No family invitations yet.'));rows.forEach(row=>{const item=h('div',null,{class:'ms-request'}),active=!row.revoked_at&&new Date(row.expires_at)>new Date();item.append(userText('p',row.email),note((active?'Expires: ':'Inactive · ')+date(row.expires_at)));if(active)item.append(toolbar(button('Copy invitation text',async()=>{await navigator.clipboard.writeText('Sat Sri Akal Ji. You have been invited to view MERI SUKHNA request '+r.id+'. Sign in with '+row.email+' at '+new URL('account.html',location.href).href+'. Access expires '+date(row.expires_at)+'.');say('Invitation text copied. Send it to your family member yourself.');},'secondary'),button('Revoke access',async()=>{await api.rpc('revoke_family',{iid:row.id});await requestDetails(body,r,false);},'secondary')));panel.append(item);});
+ async function familyPanel(r,body){const panel=box(h('h3','Family access')),rows=await api.table('ms_family','select=*&request_id=eq.'+r.id+'&order=created_at.desc');panel.append(note('No messages are sent automatically.'));if(!rows.length)panel.append(note('No family invitations yet.'));rows.forEach(row=>{const item=h('div',null,{class:'ms-request'}),active=!row.revoked_at&&new Date(row.expires_at)>new Date();item.append(userText('p',row.email),note((active?'Expires: ':'Inactive · ')+date(row.expires_at)));if(active)item.append(toolbar(button('Copy invitation text',async()=>{await navigator.clipboard.writeText('Sat Sri Akal Ji. You have been invited to view MERI SUKHNA request '+r.id+'. Sign in with '+row.email+' at '+new URL('/account',location.href).href+'. Access expires '+date(row.expires_at)+'.');say('Invitation text copied. Send it to your family member yourself.');},'secondary'),button('Revoke access',async()=>{await api.rpc('revoke_family',{iid:row.id});await requestDetails(body,r,false);},'secondary')));panel.append(item);});
   const form=h('form'),email=field('Family member’s email','email','',{required:true,maxlength:254}),days=field('Access expires after (days)','number',7,{min:1,max:30,required:true}),viewGallery=check('Allow private gallery'),viewCall=check('Allow Premium live-call details');viewCall.input.disabled=r.selection.package!=='Complete';form.append(email.wrap,days.wrap,viewGallery.wrap,viewCall.wrap);const submit=h('button','Create invitation',{type:'submit',class:'ms-button secondary'});form.append(submit);form.onsubmit=e=>{e.preventDefault();submit.disabled=true;busy(async()=>{await api.rpc('invite_family',{rid:r.id,email:email.input.value.trim(),can_gallery:viewGallery.input.checked,can_call:viewCall.input.checked,days:Number(days.input.value)});await requestDetails(body,r,false);say('Invitation created. Send the copied text yourself; no invitation has been delivered automatically.');}).finally(()=>submit.disabled=false);};panel.append(form);return panel;
  }
  async function gallery(r,staff=false,refresh=()=>{}){const panel=box(h('h3','Private gallery')),media=await api.table('ms_media','select=*&request_id=eq.'+r.id+'&order=created_at.desc');if(!media.length){panel.append(note('No completion media yet.'));return panel;}panel.append(note('Gallery access links expire after 60 seconds.'));const grid=h('div',null,{class:'ms-gallery'});media.forEach(item=>{const card=h('div');card.append(userText('p',item.caption),button('View privately',async()=>{const signed=await api.mediaUrl(item.path),video=/\.(mp4|webm)$/i.test(item.path),el=h(video?'video':'img',null,video?{controls:true,src:signed,preload:'metadata'}:{src:signed,alt:item.caption,loading:'lazy'});card.append(el);setTimeout(()=>{el.removeAttribute('src');el.remove();},60000);},'secondary'));if(staff)card.append(button(item.visible?'Hide from gallery':'Restore to gallery',async()=>{await api.rpc('set_media_visibility',{mid:item.id,is_visible:!item.visible});await refresh();},'secondary'));grid.append(card);});panel.append(grid);return panel;}

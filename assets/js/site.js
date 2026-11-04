@@ -1,5 +1,5 @@
 
-    const REQUEST_URL = 'https://wa.me/917717534949?text='+encodeURIComponent('Sat Sri Akal Ji! I would like to arrange a Meri Sukhna request. Please help me choose a package and Gurdwara Sahib, and share availability, an itemised quote and payment/cancellation terms. I prefer to speak in Punjabi or English.');
+    const REQUEST_URL = 'https://wa.me/917717534949?text='+encodeURIComponent('Sat Sri Akal Ji! I would like to arrange a Meri Sukhna request. Please help me choose a package and Gurudwara Sahib, and share availability, an itemised quote and payment/cancellation terms. I prefer to speak in Punjabi or English.');
     const INSTAGRAM_URL = 'https://instagram.com/merisukhna';
   
 
@@ -27,7 +27,7 @@
 
 // Homepage photographs: random order, five-second cadence, progressive loading.
 (() => {
- const slides=[{"src":"assets/images/gurdwara-01.webp?v=20261102-hd1","alt":"Sri Harmandir Sahib (Golden Temple), Amritsar","name":"Sri Harmandir Sahib (Golden Temple)","place":"Amritsar"},{"src":"assets/images/gurdwara-11.webp?v=20261102-hd1","alt":"Gurdwara Sri Tarn Taran Sahib","name":"Gurdwara Sri Tarn Taran Sahib","place":"Tarn Taran"},{"src":"assets/images/gurdwara-12.webp?v=20261102-hd1","alt":"Gurdwara Ber Sahib, Sultanpur Lodhi","name":"Gurdwara Sri Ber Sahib","place":"Sultanpur Lodhi"},{"src":"assets/images/gurdwara-13.webp?v=20261102-hd1","alt":"Takht Sri Kesgarh Sahib, Anandpur Sahib","name":"Takht Sri Kesgarh Sahib","place":"Sri Anandpur Sahib"}];
+ const slides=[{"src":"assets/images/gurdwara-01.webp?v=20261102-hd1","alt":"Sri Harmandir Sahib (Golden Temple), Amritsar","name":"Sri Harmandir Sahib (Golden Temple)","place":"Amritsar"},{"src":"assets/images/gurdwara-11.webp?v=20261102-hd1","alt":"Gurudwara Sri Tarn Taran Sahib","name":"Gurudwara Sri Tarn Taran Sahib","place":"Tarn Taran"},{"src":"assets/images/gurdwara-12.webp?v=20261102-hd1","alt":"Gurudwara Ber Sahib, Sultanpur Lodhi","name":"Gurudwara Sri Ber Sahib","place":"Sultanpur Lodhi"},{"src":"assets/images/gurdwara-13.webp?v=20261102-hd1","alt":"Takht Sri Kesgarh Sahib, Anandpur Sahib","name":"Takht Sri Kesgarh Sahib","place":"Sri Anandpur Sahib"}];
  const carousel=document.getElementById('heroCarousel');if(!carousel)return;
  const caption=document.getElementById('heroCaption');const controls=carousel.querySelector('.hero-carousel-controls');
  const dots=[...carousel.querySelectorAll('.hero-dot')],pause=carousel.querySelector('.hero-pause');

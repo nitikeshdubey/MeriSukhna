@@ -1,0 +1,3 @@
+'use strict';
+const journalSearch=document.getElementById('journalSearch');
+if(journalSearch){const cards=[...document.querySelectorAll('#historyLibrary [data-journal-card]')],status=document.getElementById('journalResults'),empty=document.getElementById('journalEmpty');journalSearch.addEventListener('input',()=>{const query=journalSearch.value.trim().toLocaleLowerCase();let count=0;for(const card of cards){card.hidden=!card.textContent.toLocaleLowerCase().includes(query);if(!card.hidden)count++;}status.textContent=count+' '+(count===1?'history':'histories')+' to explore';empty.hidden=count!==0;});}

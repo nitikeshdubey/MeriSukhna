@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /backend/
+Disallow: /tools/
+Disallow: /docs/
+Disallow: /work/
+Sitemap: https://merisukhna.com/sitemap-index.xml

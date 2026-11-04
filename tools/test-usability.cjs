@@ -1,0 +1,26 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const root=path.resolve(__dirname,'..');
+(async()=>{
+ const journey=fs.readFileSync(root+'/assets/js/journey.js','utf8');
+ const run=journey.slice(journey.indexOf(' window.validatePackage='),journey.indexOf(' function forward'));
+ let place=true,steps=[],reported=0;
+ const field=(valid=true,disabled=false)=>({disabled,checkValidity:()=>valid,reportValidity:()=>reported++});
+ const ctx={window:{},validate:()=>place,go:s=>steps.push(s),form:{elements:{date:field(),notes:field()}}};
+ vm.runInNewContext(run,ctx);
+ assert(ctx.window.validatePackage());
+ place=false;assert.equal(ctx.window.validatePackage(),false);assert.equal(steps.pop(),1);
+ place=true;ctx.form.elements.date=field(false);assert.equal(ctx.window.validatePackage(),false);assert.equal(steps.pop(),3);assert.equal(reported,1);
+ ctx.form.elements.date=field(false,true);assert(ctx.window.validatePackage());
+ ctx.form.elements.notes=field(false);assert.equal(ctx.window.validatePackage(),false);
+ const platform=fs.readFileSync(root+'/assets/js/platform.js','utf8');
+ const cardCode=platform.slice(platform.indexOf(' function requestCard'),platform.indexOf(' async function requestDetails'));
+ let toggle,attempts=0,pending;
+ const cardCtx={h:()=>({append(){},addEventListener(e,fn){toggle=fn;},open:true}),userText:()=>({}),location:{hash:''},busy:fn=>{pending=fn().catch(()=>{});},requestDetails:async()=>{if(++attempts===1)throw Error('Network failure');}};
+ vm.runInNewContext(cardCode,cardCtx);cardCtx.requestCard({id:'test',status:'received'});
+ toggle();await pending;toggle();await pending;toggle();await pending;assert.equal(attempts,2,'Retry once after failure; keep successful result cached');
+ const shared=fs.readFileSync(root+'/assets/js/shared.js','utf8'),cleared=[];
+ const clear=shared.slice(shared.indexOf("document.getElementById('clearDevice').onclick="),shared.indexOf("document.getElementById('saveAccountDraft').onclick="));
+ const button={};vm.runInNewContext(clear,{document:{getElementById:()=>button},draftKey:'device',localStorage:{removeItem:k=>cleared.push(k)},sessionStorage:{removeItem:k=>cleared.push(k)},message(){}});
+ button.onclick();assert.deepEqual(cleared,['device','ms-session-draft']);
+ console.log('PASS: package date/notes validation, invalid place routing, disabled date, network retry and both draft stores cleared.');
+})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,11 +1,13 @@
 import nodemailer from "npm:nodemailer@10.3.1";
-const origin = "https://nitikeshdubey.github.io";
-const headers = {"Access-Control-Allow-Origin":origin,"Access-Control-Allow-Headers":"authorization, apikey, content-type","Access-Control-Allow-Methods":"POST, OPTIONS","Content-Type":"application/json","Vary":"Origin"};
-const reply = (status:number,message:string)=>new Response(JSON.stringify({message}),{status,headers});
+const allowedOrigins=["https://merisukhna.com","https://www.merisukhna.com","https://nitikeshdubey.github.io"];
 Deno.serve(async req=>{
+ const origin=req.headers.get("origin")||"";
+ const headers={"Access-Control-Allow-Origin":allowedOrigins.includes(origin)?origin:allowedOrigins[0],"Access-Control-Allow-Headers":"authorization, apikey, content-type","Access-Control-Allow-Methods":"POST, OPTIONS","Content-Type":"application/json","Vary":"Origin"};
+ const reply=(status:number,message:string)=>new Response(JSON.stringify({message}),{status,headers});
+ if(!allowedOrigins.includes(origin))return reply(403,"Origin not allowed");
  if(req.method==="OPTIONS")return new Response(null,{status:204,headers});
  if(req.method!=="POST")return reply(405,"Method not allowed");
- if(req.headers.get("origin")!==origin)return reply(403,"Origin not allowed");
+
  const url=Deno.env.get("SUPABASE_URL")!, service=Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, password=Deno.env.get("SMTP_PASSWORD");
  if(!password)return reply(503,"Email delivery is awaiting activation");
  const authorization=req.headers.get("authorization")||"";
@@ -28,7 +30,7 @@ Deno.serve(async req=>{
  if(!await claim.json())return reply(200,"Receipt already queued or sent");
  const transport=nodemailer.createTransport({host:"smtp.hostinger.com",port:465,secure:true,auth:{user:"contact@merisukhna.com",pass:password},connectionTimeout:10000,socketTimeout:15000,disableFileAccess:true,disableUrlAccess:true});
  try{
-  await transport.sendMail({from:'"Meri Sukhna" <contact@merisukhna.com>',to:user.email,replyTo:"contact@merisukhna.com",subject:"Your Meri Sukhna request has been received",text:"Sat Sri Akal Ji,\n\nYour request has been saved.\nReference: "+id+"\n\nOur team will review availability and prepare a written quotation. This receipt is not a confirmed booking. Arrangements and the total must be agreed before proceeding.\n\nView your request: https://nitikeshdubey.github.io/MeriSukhna/account.html#"+id+"\n\nContact: contact@merisukhna.com\nWhatsApp: +91 77175 34949"});
+  await transport.sendMail({from:'"Meri Sukhna" <contact@merisukhna.com>',to:user.email,replyTo:"contact@merisukhna.com",subject:"Your Meri Sukhna request has been received",text:"Sat Sri Akal Ji,\n\nYour request has been saved.\nReference: "+id+"\n\nOur team will review availability and prepare a written quotation. This receipt is not a confirmed booking. Arrangements and the total must be agreed before proceeding.\n\nView your request: https://merisukhna.com/account.html#"+id+"\n\nContact: contact@merisukhna.com\nWhatsApp: +91 77175 34949"});
   const saved=await rpc("finish_request_receipt",{request_id:id,delivered:true});
   if(!saved.ok)return reply(503,"Delivery status pending");
   return reply(200,"Receipt sent");
